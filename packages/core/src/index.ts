@@ -11,3 +11,4 @@ export * from './reporter/html.js';
 export * from './reporter/ai-remediation.js';
 export * from './runner/test-runner.js';
 export * from './sandbox/server.js';
+export * from './discovery/detector.js';

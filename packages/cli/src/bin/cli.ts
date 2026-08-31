@@ -21,7 +21,7 @@ program
   .option('-j, --jitter <ms>', 'Microsecond/millisecond jitter window in ms', '5')
   .option('--gmv <usd>', 'Monthly GMV transaction volume for financial risk modeling')
   .option('--ticket-size <usd>', 'Average ticket order value in USD')
-  .option('--tui', 'Launch interactive full-screen React Terminal UI')
+  .option('--tui', 'Launch interactive full-screen Terminal UI')
   .option('--ci', 'Enforce strict CI exit code (exit code 1 on invariant failures)')
   .option('--studio', 'Launch local visual Studio on port 4400 after execution');
 
@@ -49,7 +49,7 @@ program
 program
   .command('tui')
   .alias('interactive')
-  .description('Launch interactive full-screen React Terminal UI with ASCII latency charts')
+  .description('Launch interactive full-screen React Terminal UI')
   .action(async (options: any) => {
     const opts = { ...program.opts(), ...options };
     await runInteractiveTui({ url: opts.url });

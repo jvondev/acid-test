@@ -21,7 +21,10 @@ export class ProjectDetector {
     const deps = { ...(packageJson?.dependencies || {}), ...(packageJson?.devDependencies || {}) };
     const { detectedServices, discoveredRoutes, discoveredSchemas } = ServiceScanner.scan(projectRoot, deps, envVars);
 
-    const portsToProbe = envVars['PORT'] ? [parseInt(envVars['PORT'], 10)] : [3000, 8000, 5000, 4000, 8080];
+    // Probe common developer ports: Next.js (3000), NestJS/Express (3001), Vite (5173), FastAPI/Django (8000), Go/Gin (8080), Supabase (54321)
+    const portsToProbe = envVars['PORT'] 
+      ? [parseInt(envVars['PORT'], 10), 3000, 3001, 5173, 8000, 8080, 4000, 5000, 54321] 
+      : [3000, 3001, 5173, 8000, 8080, 4000, 5000, 54321];
     const liveServer = await this.probeLocalServers(portsToProbe);
 
     const activeDomains = detectedServices.map(s => s.domain);
@@ -66,8 +69,8 @@ export class ProjectDetector {
     for (const port of ports) {
       const res = await new Promise<{ up: boolean; latencyMs: number }>((resolve) => {
         const start = Date.now();
-        const req = http.get(`http://localhost:${port}/`, { timeout: 300 }, () => {
-          resolve({ up: true, latencyMs: Date.now() - start });
+        const req = http.get(`http://localhost:${port}/`, { timeout: 250 }, () => {
+          resolve({ up: true, latencyMs: Math.max(1, Date.now() - start) });
           req.destroy();
         });
         req.on('error', () => resolve({ up: false, latencyMs: 0 }));

@@ -1,9 +1,9 @@
-import {
+﻿import {
   type InvariantTest,
   type ExecutionContext,
   type InvariantResult,
   ConnectionPoolHarness,
-} from '@acidtest/core';
+} from '@acid-test/core';
 
 export class LedgerReconciliationTest implements InvariantTest {
   id = 'ACID-BILLING-007';

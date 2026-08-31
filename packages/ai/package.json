@@ -1,5 +1,5 @@
-{
-  "name": "@acidtest/ai",
+﻿{
+  "name": "@acid-test/ai",
   "version": "1.0.0",
   "description": "AI gateway auditor supporting OpenAI, Anthropic, Gemini, and Ollama for Acidtest",
   "main": "./dist/index.js",
@@ -21,7 +21,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@acidtest/core": "workspace:*"
+    "@acid-test/core": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.13.9",

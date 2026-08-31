@@ -1,4 +1,4 @@
-# 04 — Distributed Queue & Worker Chaos Specification (`@acidtest/queue`)
+﻿# 04 — Distributed Queue & Worker Chaos Specification (`@acid-test/queue`)
 
 ## 1. Scope & Target Engines
 This module audits background job queues, message brokers, and worker processes against crash loops, memory leaks, poison pills, and retry storms.

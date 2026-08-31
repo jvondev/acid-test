@@ -1,4 +1,4 @@
-import { StudioServer } from '@acidtest/studio';
+﻿import { StudioServer } from '@acid-test/studio';
 
 export async function runStudioCommand(options: { port?: string; host?: string }): Promise<number> {
   const port = options.port ? parseInt(options.port, 10) : 4400;

@@ -1,6 +1,6 @@
-import pc from 'picocolors';
-import { TestRunner, TerminalReporter } from '@acidtest/core';
-import { createBillingSuite } from '@acidtest/billing';
+﻿import pc from 'picocolors';
+import { TestRunner, TerminalReporter } from '@acid-test/core';
+import { createBillingSuite } from '@acid-test/billing';
 import type { AuditOptions } from './audit.js';
 
 export async function runBillingCommand(options: AuditOptions & { provider?: string }): Promise<number> {

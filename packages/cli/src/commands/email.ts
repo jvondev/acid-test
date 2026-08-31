@@ -1,6 +1,6 @@
-import pc from 'picocolors';
-import { TestRunner, TerminalReporter } from '@acidtest/core';
-import { createEmailSuite } from '@acidtest/email';
+﻿import pc from 'picocolors';
+import { TestRunner, TerminalReporter } from '@acid-test/core';
+import { createEmailSuite } from '@acid-test/email';
 import type { AuditOptions } from './audit.js';
 
 export async function runEmailCommand(options: AuditOptions & { provider?: string }): Promise<number> {

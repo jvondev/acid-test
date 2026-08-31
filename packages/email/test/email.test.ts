@@ -1,8 +1,8 @@
-import { describe, it, expect } from 'vitest';
-import { TestRunner } from '@acidtest/core';
+﻿import { describe, it, expect } from 'vitest';
+import { TestRunner } from '@acid-test/core';
 import { createEmailSuite } from '../src/suite.js';
 
-describe('@acidtest/email', () => {
+describe('@acid-test/email', () => {
   it('executes email communication suite', async () => {
     const suite = createEmailSuite('resend');
     const report = await TestRunner.runSuite(suite, {});

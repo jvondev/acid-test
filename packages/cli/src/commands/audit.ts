@@ -1,13 +1,13 @@
-import pc from 'picocolors';
-import { TestRunner, TerminalReporter, ProjectDetector, type AuditReport, type DetectedDomain } from '@acidtest/core';
-import { createBillingSuite } from '@acidtest/billing';
-import { createDbSuite } from '@acidtest/db';
-import { createAuthSuite } from '@acidtest/auth';
-import { createQueueSuite } from '@acidtest/queue';
-import { createWebhookSuite } from '@acidtest/webhook';
-import { createAiSuite } from '@acidtest/ai';
-import { createEmailSuite } from '@acidtest/email';
-import { createStorageSuite } from '@acidtest/storage';
+﻿import pc from 'picocolors';
+import { TestRunner, TerminalReporter, ProjectDetector, type AuditReport, type DetectedDomain } from '@acid-test/core';
+import { createBillingSuite } from '@acid-test/billing';
+import { createDbSuite } from '@acid-test/db';
+import { createAuthSuite } from '@acid-test/auth';
+import { createQueueSuite } from '@acid-test/queue';
+import { createWebhookSuite } from '@acid-test/webhook';
+import { createAiSuite } from '@acid-test/ai';
+import { createEmailSuite } from '@acid-test/email';
+import { createStorageSuite } from '@acid-test/storage';
 import { runDemoCommand } from './demo.js';
 
 export interface AuditOptions {
@@ -102,9 +102,9 @@ export async function runAudit(modules: string[], options: AuditOptions): Promis
   } else {
     console.log(pc.yellow(`ℹ No supported backend integrations (Stripe, PostgreSQL, Clerk, BullMQ, etc.) detected in this directory.`));
     console.log(`\nTo run an audit:`);
-    console.log(`  1. Run ${pc.cyan('npx @acidtest/cli demo')} to try out live adversarial fuzzing on an in-memory proving ground.`);
-    console.log(`  2. Specify a domain command directly (e.g. ${pc.cyan('npx @acidtest/cli billing --url http://localhost:3000/api/webhooks/stripe')}).`);
-    console.log(`  3. Run ${pc.cyan('npx @acidtest/cli audit billing db')} to force auditing specific modules.\n`);
+    console.log(`  1. Run ${pc.cyan('npx @acid-test/cli demo')} to try out live adversarial fuzzing on an in-memory proving ground.`);
+    console.log(`  2. Specify a domain command directly (e.g. ${pc.cyan('npx @acid-test/cli billing --url http://localhost:3000/api/webhooks/stripe')}).`);
+    console.log(`  3. Run ${pc.cyan('npx @acid-test/cli audit billing db')} to force auditing specific modules.\n`);
     return 0;
   }
 

@@ -1,6 +1,6 @@
-import pc from 'picocolors';
-import { TestRunner, TerminalReporter } from '@acidtest/core';
-import { createAuthSuite } from '@acidtest/auth';
+﻿import pc from 'picocolors';
+import { TestRunner, TerminalReporter } from '@acid-test/core';
+import { createAuthSuite } from '@acid-test/auth';
 import type { AuditOptions } from './audit.js';
 
 export async function runAuthCommand(options: AuditOptions & { provider?: string }): Promise<number> {

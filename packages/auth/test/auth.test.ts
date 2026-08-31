@@ -1,8 +1,8 @@
-import { describe, it, expect, beforeAll, afterAll } from 'vitest';
-import { SandboxServer, TestRunner } from '@acidtest/core';
+﻿import { describe, it, expect, beforeAll, afterAll } from 'vitest';
+import { SandboxServer, TestRunner } from '@acid-test/core';
 import { createAuthSuite } from '../src/suite.js';
 
-describe('@acidtest/auth', () => {
+describe('@acid-test/auth', () => {
   let server: SandboxServer;
   let targetUrl: string;
 

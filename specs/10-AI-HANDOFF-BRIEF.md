@@ -1,4 +1,4 @@
-# Context & Architecture Brief: Acidtest Backend Reliability & Chaos Suite
+﻿# Context & Architecture Brief: Acidtest Backend Reliability & Chaos Suite
 
 ### 1. System Overview & Architecture
 `Acidtest` is an adversarial reliability, security, and chaos-testing suite engineered to audit modern distributed web backends against the foundational laws of **Atomicity**, **Consistency**, **Isolation**, and **Durability (ACID)**.
@@ -6,8 +6,8 @@
 It is structured as a high-performance TypeScript monorepo managed with **pnpm workspaces + Turborepo**:
 
 * **Root Location:** [`D:\jvondev\acidtest`](file:///D:/jvondev/acidtest)
-* **Execution Harness:** `@acidtest/cli` (Global terminal runner with domain commands and platform aliases: `billing`/`stripe`, `db`/`pg`, `auth`/`clerk`, `queue`/`bullmq`, `webhook`, `ai`, `email`, `storage`).
-* **Core Systems Engine:** `@acidtest/core` (Cryptographic HMAC recalculation, concurrent burst fuzzer with microsecond jitter, SQL AST parser, dual-layer reporting engine).
+* **Execution Harness:** `@acid-test/cli` (Global terminal runner with domain commands and platform aliases: `billing`/`stripe`, `db`/`pg`, `auth`/`clerk`, `queue`/`bullmq`, `webhook`, `ai`, `email`, `storage`).
+* **Core Systems Engine:** `@acid-test/core` (Cryptographic HMAC recalculation, concurrent burst fuzzer with microsecond jitter, SQL AST parser, dual-layer reporting engine).
 * **Domain Modules:** Dedicated packages under `packages/` (`billing`, `db`, `auth`, `queue`, `webhook`, `ai`, `email`, `storage`).
 * **Visual Web Studio:** `apps/studio` (Local zero-config web dashboard on `localhost:4400`).
 
@@ -32,9 +32,9 @@ It is structured as a high-performance TypeScript monorepo managed with **pnpm w
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
 │  1. TARGET INGRESS & HARNESS                                                │
-│     npx @acidtest/cli <module> [--url | --db | --redis | --fuzz]            │
+│     npx @acid-test/cli <module> [--url | --db | --redis | --fuzz]            │
 │                              │                                              │
-│  2. ADVERSARIAL INVARIANT ENGINE (@acidtest/core)                           │
+│  2. ADVERSARIAL INVARIANT ENGINE (@acid-test/core)                           │
 │     ├── Concurrent Burst Fuzzer (Worker threads, 0–25ms jitter)             │
 │     ├── Time-Travel Lifecycle Sequencer (Synthetic multi-state events)      │
 │     ├── Multi-Provider Cryptographic Auto-Signer (Raw-buffer HMAC)          │
@@ -56,7 +56,7 @@ It is structured as a high-performance TypeScript monorepo managed with **pnpm w
 1. **Rejected: Passive Webhook Proxy / Inspector**
    - *Why Rejected:* Passive request logging is a commodity easily scaffolded in 5 minutes by LLMs. Provides zero proprietary moat and does not actively detect race conditions or security leaks.
 2. **Rejected: Standalone Heavy Desktop-Only Binary**
-   - *Why Rejected:* Asking developers to download a 120MB Electron app just to audit a webhook creates massive adoption friction. The `npx @acidtest/cli` model gives instant zero-install execution in under 1 second.
+   - *Why Rejected:* Asking developers to download a 120MB Electron app just to audit a webhook creates massive adoption friction. The `npx @acid-test/cli` model gives instant zero-install execution in under 1 second.
 3. **Rejected: Fragmented Multi-Repo Repositories**
    - *Why Rejected:* Creating 5 separate GitHub repos (`stripe-tester`, `pg-guard`, `queue-chaos`) creates massive maintenance fatigue and dilutes brand authority. The single Monorepo with modular packages provides 10x engineering leverage.
 4. **Rejected: Single-Provider Locked Naming**

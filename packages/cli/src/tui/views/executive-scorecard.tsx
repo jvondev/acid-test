@@ -1,6 +1,6 @@
-import React from 'react';
+﻿import React from 'react';
 import { Box, Text } from 'ink';
-import type { InvariantResult, HealthGrade } from '@acidtest/core';
+import type { InvariantResult, HealthGrade } from '@acid-test/core';
 import { THEME, formatMoney, renderBar, getHealthColor } from '../theme.js';
 
 interface ScorecardProps {

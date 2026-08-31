@@ -1,11 +1,11 @@
-import http from 'node:http';
+﻿import http from 'node:http';
 import https from 'node:https';
 import { URL } from 'node:url';
 import {
   type InvariantTest,
   type ExecutionContext,
   type InvariantResult,
-} from '@acidtest/core';
+} from '@acid-test/core';
 
 export class StreamingSseDisconnectTest implements InvariantTest {
   id = 'ACID-AI-001';

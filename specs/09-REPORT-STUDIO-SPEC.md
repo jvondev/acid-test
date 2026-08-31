@@ -1,4 +1,4 @@
-# 09 — Report Engine & Local Studio Specification (`@acidtest/core` & `@acidtest/studio`)
+﻿# 09 — Report Engine & Local Studio Specification (`@acid-test/core` & `@acid-test/studio`)
 
 ## 1. Scope & Core Objectives
 This specification governs how `Acidtest` formats, presents, and exports audit findings across:
@@ -37,7 +37,7 @@ This specification governs how `Acidtest` formats, presents, and exports audit f
 │                                                                             │
 │  📄 Full HTML Report: .acidtest/reports/audit-2026-08-31.html               │
 │  🤖 AI Fix Prompt:    .acidtest/remediation.prompt.md                      │
-│  🌐 Open Studio:      npx @acidtest/cli studio                              │
+│  🌐 Open Studio:      npx @acid-test/cli studio                              │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -68,7 +68,7 @@ $$\text{Monthly Risk (\$)} = (\text{Avg Transaction Value} \times \text{Est. Fai
       "title": "Non-Idempotent Webhook Processing (Double Credit)",
       "failing_file": "app/api/webhooks/stripe/route.ts",
       "line_number": 34,
-      "reproduction_command": "npx @acidtest/cli billing --fuzz burst --concurrency 10",
+      "reproduction_command": "npx @acid-test/cli billing --fuzz burst --concurrency 10",
       "root_cause": "Database insert lacks a unique constraint or distributed lock on `stripe_event_id`.",
       "ai_prompt": "Refactor app/api/webhooks/stripe/route.ts: Wrap the checkout completion logic in a PostgreSQL transaction and add an ON CONFLICT (stripe_event_id) DO NOTHING clause to prevent duplicate insertions."
     }

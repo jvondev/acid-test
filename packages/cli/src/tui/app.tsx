@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+﻿import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Box, useInput, useApp } from 'ink';
-import type { InvariantResult, HealthGrade } from '@acidtest/core';
-import { TestRunner, ProjectDetector, FinancialRiskCalculator, SandboxServer } from '@acidtest/core';
+import type { InvariantResult, HealthGrade } from '@acid-test/core';
+import { TestRunner, ProjectDetector, FinancialRiskCalculator, SandboxServer } from '@acid-test/core';
 
 import type { TuiTab, ActiveModal, ChaosConfig, FilterState } from './types.js';
 import { HeaderRibbon } from './components/header.js';

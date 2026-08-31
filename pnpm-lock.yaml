@@ -23,31 +23,31 @@ importers:
 
   apps/studio:
     dependencies:
-      '@acidtest/ai':
+      '@acid-test/ai':
         specifier: workspace:*
         version: link:../../packages/ai
-      '@acidtest/auth':
+      '@acid-test/auth':
         specifier: workspace:*
         version: link:../../packages/auth
-      '@acidtest/billing':
+      '@acid-test/billing':
         specifier: workspace:*
         version: link:../../packages/billing
-      '@acidtest/core':
+      '@acid-test/core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@acidtest/db':
+      '@acid-test/db':
         specifier: workspace:*
         version: link:../../packages/db
-      '@acidtest/email':
+      '@acid-test/email':
         specifier: workspace:*
         version: link:../../packages/email
-      '@acidtest/queue':
+      '@acid-test/queue':
         specifier: workspace:*
         version: link:../../packages/queue
-      '@acidtest/storage':
+      '@acid-test/storage':
         specifier: workspace:*
         version: link:../../packages/storage
-      '@acidtest/webhook':
+      '@acid-test/webhook':
         specifier: workspace:*
         version: link:../../packages/webhook
       picocolors:
@@ -72,7 +72,7 @@ importers:
 
   packages/ai:
     dependencies:
-      '@acidtest/core':
+      '@acid-test/core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -94,7 +94,7 @@ importers:
 
   packages/auth:
     dependencies:
-      '@acidtest/core':
+      '@acid-test/core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -116,7 +116,7 @@ importers:
 
   packages/billing:
     dependencies:
-      '@acidtest/core':
+      '@acid-test/core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -138,34 +138,34 @@ importers:
 
   packages/cli:
     dependencies:
-      '@acidtest/ai':
+      '@acid-test/ai':
         specifier: workspace:*
         version: link:../ai
-      '@acidtest/auth':
+      '@acid-test/auth':
         specifier: workspace:*
         version: link:../auth
-      '@acidtest/billing':
+      '@acid-test/billing':
         specifier: workspace:*
         version: link:../billing
-      '@acidtest/core':
+      '@acid-test/core':
         specifier: workspace:*
         version: link:../core
-      '@acidtest/db':
+      '@acid-test/db':
         specifier: workspace:*
         version: link:../db
-      '@acidtest/email':
+      '@acid-test/email':
         specifier: workspace:*
         version: link:../email
-      '@acidtest/queue':
+      '@acid-test/queue':
         specifier: workspace:*
         version: link:../queue
-      '@acidtest/storage':
+      '@acid-test/storage':
         specifier: workspace:*
         version: link:../storage
-      '@acidtest/studio':
+      '@acid-test/studio':
         specifier: workspace:*
         version: link:../../apps/studio
-      '@acidtest/webhook':
+      '@acid-test/webhook':
         specifier: workspace:*
         version: link:../webhook
       '@clack/prompts':
@@ -245,7 +245,7 @@ importers:
 
   packages/db:
     dependencies:
-      '@acidtest/core':
+      '@acid-test/core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -267,7 +267,7 @@ importers:
 
   packages/email:
     dependencies:
-      '@acidtest/core':
+      '@acid-test/core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -289,7 +289,7 @@ importers:
 
   packages/queue:
     dependencies:
-      '@acidtest/core':
+      '@acid-test/core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -311,7 +311,7 @@ importers:
 
   packages/storage:
     dependencies:
-      '@acidtest/core':
+      '@acid-test/core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -333,7 +333,7 @@ importers:
 
   packages/webhook:
     dependencies:
-      '@acidtest/core':
+      '@acid-test/core':
         specifier: workspace:*
         version: link:../core
     devDependencies:

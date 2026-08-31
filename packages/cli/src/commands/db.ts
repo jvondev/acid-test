@@ -1,6 +1,6 @@
-import pc from 'picocolors';
-import { TestRunner, TerminalReporter } from '@acidtest/core';
-import { createDbSuite } from '@acidtest/db';
+﻿import pc from 'picocolors';
+import { TestRunner, TerminalReporter } from '@acid-test/core';
+import { createDbSuite } from '@acid-test/db';
 import type { AuditOptions } from './audit.js';
 
 export async function runDbCommand(options: AuditOptions & { provider?: string }): Promise<number> {

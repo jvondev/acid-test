@@ -1,6 +1,6 @@
-import pc from 'picocolors';
-import { TestRunner, TerminalReporter } from '@acidtest/core';
-import { createAiSuite } from '@acidtest/ai';
+﻿import pc from 'picocolors';
+import { TestRunner, TerminalReporter } from '@acid-test/core';
+import { createAiSuite } from '@acid-test/ai';
 import type { AuditOptions } from './audit.js';
 
 export async function runAiCommand(options: AuditOptions & { provider?: string }): Promise<number> {

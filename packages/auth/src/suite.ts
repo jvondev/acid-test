@@ -1,4 +1,4 @@
-import type { InvariantSuite, InvariantTest } from '@acidtest/core';
+﻿import type { InvariantSuite, InvariantTest } from '@acid-test/core';
 import { TenantHoppingFuzzerTest } from './invariants/3.1-tenant-hopping-fuzzer.js';
 import { TokenReplayLogoutTest } from './invariants/3.2-token-replay-logout.js';
 import { JwtAlgNoneAttackTest } from './invariants/3.3-jwt-alg-none-attack.js';

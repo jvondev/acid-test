@@ -1,8 +1,8 @@
-import {
+﻿import {
   type InvariantTest,
   type ExecutionContext,
   type InvariantResult,
-} from '@acidtest/core';
+} from '@acid-test/core';
 
 export class SigkillStalledRecoveryTest implements InvariantTest {
   id = 'ACID-QUEUE-002';

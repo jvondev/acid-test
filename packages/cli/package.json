@@ -1,5 +1,5 @@
 {
-  "name": "@acidtest/cli",
+  "name": "@acid-test/cli",
   "version": "1.0.0",
   "description": "Universal CLI runner for Acidtest adversarial reliability and chaos suite",
   "main": "./dist/index.js",
@@ -7,6 +7,7 @@
   "types": "./dist/index.d.ts",
   "bin": {
     "acidtest": "./dist/bin/cli.mjs",
+    "acid-test": "./dist/bin/cli.mjs",
     "agy-acid": "./dist/bin/cli.mjs"
   },
   "exports": {
@@ -26,16 +27,16 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@acidtest/ai": "workspace:*",
-    "@acidtest/auth": "workspace:*",
-    "@acidtest/billing": "workspace:*",
-    "@acidtest/core": "workspace:*",
-    "@acidtest/db": "workspace:*",
-    "@acidtest/email": "workspace:*",
-    "@acidtest/queue": "workspace:*",
-    "@acidtest/storage": "workspace:*",
-    "@acidtest/studio": "workspace:*",
-    "@acidtest/webhook": "workspace:*",
+    "@acid-test/ai": "workspace:*",
+    "@acid-test/auth": "workspace:*",
+    "@acid-test/billing": "workspace:*",
+    "@acid-test/core": "workspace:*",
+    "@acid-test/db": "workspace:*",
+    "@acid-test/email": "workspace:*",
+    "@acid-test/queue": "workspace:*",
+    "@acid-test/storage": "workspace:*",
+    "@acid-test/studio": "workspace:*",
+    "@acid-test/webhook": "workspace:*",
     "@clack/prompts": "^1.7.0",
     "asciichart": "^1.5.25",
     "commander": "^13.1.0",

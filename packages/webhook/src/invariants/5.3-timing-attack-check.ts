@@ -1,9 +1,9 @@
-import {
+﻿import {
   type InvariantTest,
   type ExecutionContext,
   type InvariantResult,
   MultiProviderHmacEngine,
-} from '@acidtest/core';
+} from '@acid-test/core';
 
 export class TimingAttackCheckTest implements InvariantTest {
   id = 'ACID-WEBHOOK-003';

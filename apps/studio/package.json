@@ -1,5 +1,5 @@
-{
-  "name": "@acidtest/studio",
+﻿{
+  "name": "@acid-test/studio",
   "version": "1.0.0",
   "description": "Zero-config local visual dashboard on localhost:4400 for Acidtest",
   "main": "./dist/index.js",
@@ -21,15 +21,15 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@acidtest/core": "workspace:*",
-    "@acidtest/billing": "workspace:*",
-    "@acidtest/db": "workspace:*",
-    "@acidtest/auth": "workspace:*",
-    "@acidtest/queue": "workspace:*",
-    "@acidtest/webhook": "workspace:*",
-    "@acidtest/ai": "workspace:*",
-    "@acidtest/email": "workspace:*",
-    "@acidtest/storage": "workspace:*",
+    "@acid-test/core": "workspace:*",
+    "@acid-test/billing": "workspace:*",
+    "@acid-test/db": "workspace:*",
+    "@acid-test/auth": "workspace:*",
+    "@acid-test/queue": "workspace:*",
+    "@acid-test/webhook": "workspace:*",
+    "@acid-test/ai": "workspace:*",
+    "@acid-test/email": "workspace:*",
+    "@acid-test/storage": "workspace:*",
     "picocolors": "^1.1.1"
   },
   "devDependencies": {

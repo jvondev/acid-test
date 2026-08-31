@@ -1,4 +1,4 @@
-# 02 — Database & Isolation Specification (`@acidtest/db`)
+﻿# 02 — Database & Isolation Specification (`@acid-test/db`)
 
 ## 1. Scope & Target Engines
 This module audits database schemas, transactions, query performance, and Row-Level Security (RLS) multi-tenant policies.

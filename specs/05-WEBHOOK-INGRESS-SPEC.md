@@ -1,4 +1,4 @@
-# 05 — Webhook Ingress & Cryptographic Specification (`@acidtest/webhook`)
+﻿# 05 — Webhook Ingress & Cryptographic Specification (`@acid-test/webhook`)
 
 ## 1. Scope & Target Providers
 This module audits webhook ingress gateways, HMAC signature verification pipelines, and raw-buffer handling.

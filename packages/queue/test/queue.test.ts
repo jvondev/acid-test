@@ -1,8 +1,8 @@
-import { describe, it, expect } from 'vitest';
-import { TestRunner } from '@acidtest/core';
+﻿import { describe, it, expect } from 'vitest';
+import { TestRunner } from '@acid-test/core';
 import { createQueueSuite } from '../src/suite.js';
 
-describe('@acidtest/queue', () => {
+describe('@acid-test/queue', () => {
   it('executes queue chaos suite', async () => {
     const suite = createQueueSuite('bullmq');
     const report = await TestRunner.runSuite(suite, {});

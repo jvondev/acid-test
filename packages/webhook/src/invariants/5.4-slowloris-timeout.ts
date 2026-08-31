@@ -1,8 +1,8 @@
-import {
+﻿import {
   type InvariantTest,
   type ExecutionContext,
   type InvariantResult,
-} from '@acidtest/core';
+} from '@acid-test/core';
 
 export class SlowlorisTimeoutTest implements InvariantTest {
   id = 'ACID-WEBHOOK-004';

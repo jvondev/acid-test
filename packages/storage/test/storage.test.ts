@@ -1,8 +1,8 @@
-import { describe, it, expect } from 'vitest';
-import { TestRunner } from '@acidtest/core';
+﻿import { describe, it, expect } from 'vitest';
+import { TestRunner } from '@acid-test/core';
 import { createStorageSuite } from '../src/suite.js';
 
-describe('@acidtest/storage', () => {
+describe('@acid-test/storage', () => {
   it('executes storage security suite', async () => {
     const suite = createStorageSuite('s3');
     const report = await TestRunner.runSuite(suite, {});

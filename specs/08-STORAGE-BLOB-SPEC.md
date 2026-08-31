@@ -1,4 +1,4 @@
-# 08 — Storage & Blob Security Specification (`@acidtest/storage`)
+﻿# 08 — Storage & Blob Security Specification (`@acid-test/storage`)
 
 ## 1. Scope & Target Providers
 This module audits object storage, presigned upload URLs, file validation guards, and bucket permission policies.

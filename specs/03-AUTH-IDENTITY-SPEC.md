@@ -1,4 +1,4 @@
-# 03 — Auth & Identity Specification (`@acidtest/auth`)
+﻿# 03 — Auth & Identity Specification (`@acid-test/auth`)
 
 ## 1. Scope & Target Providers
 This module audits session tokens, JWT claims, cross-organization authorization, and API route security guards.

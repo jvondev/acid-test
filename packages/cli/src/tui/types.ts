@@ -1,4 +1,5 @@
-import type { AuditReport, InvariantResult, HealthGrade, Severity, InvariantStatus } from '@acidtest/core';
+import type { AuditReport, InvariantResult, HealthGrade, Severity, InvariantStatus } from '@acid-test/core';
+export type { AuditReport, InvariantResult, HealthGrade, Severity, InvariantStatus };
 
 export type TuiStage = 'hub' | 'detail';
 export type TuiTab = 'overview' | 'billing' | 'db' | 'auth' | 'queue' | 'webhook' | 'ai' | 'email' | 'storage';

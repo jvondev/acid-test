@@ -1,4 +1,4 @@
-import type { InvariantResult } from '@acidtest/core';
+﻿import type { InvariantResult } from '@acid-test/core';
 
 export interface CodeDiffSnippet {
   file: string;

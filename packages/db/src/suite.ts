@@ -1,4 +1,4 @@
-import type { InvariantSuite, InvariantTest } from '@acidtest/core';
+﻿import type { InvariantSuite, InvariantTest } from '@acid-test/core';
 import { RlsPenetrationMatrixTest } from './invariants/2.1-rls-penetration-matrix.js';
 import { SecurityDefinerLeakTest } from './invariants/2.2-security-definer-leak.js';
 import { NPlusOneIndexAdvisorTest } from './invariants/2.3-n-plus-one-index-advisor.js';

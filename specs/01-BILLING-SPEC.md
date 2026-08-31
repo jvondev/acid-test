@@ -1,4 +1,4 @@
-# 01 — Billing & Financial Invariant Specification (`@acidtest/billing`)
+﻿# 01 — Billing & Financial Invariant Specification (`@acid-test/billing`)
 
 ## 1. Scope & Target Providers
 This module stress-tests payment, checkout, and subscription workflows against financial race conditions, non-idempotent handlers, and ledger state drift.

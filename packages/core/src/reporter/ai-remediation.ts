@@ -1,4 +1,4 @@
-import fs from 'node:fs';
+﻿import fs from 'node:fs';
 import path from 'node:path';
 import type { AuditReport, AiRemediationIssue } from '../types/index.js';
 
@@ -27,7 +27,7 @@ export class AiRemediationExporter {
       title: f.title,
       failingFile: f.failingFile || 'src/server.ts',
       lineNumber: f.lineNumber,
-      reproductionCommand: f.curlReproduction || `npx @acidtest/cli ${report.module} --target ${report.target}`,
+      reproductionCommand: f.curlReproduction || `npx @acid-test/cli ${report.module} --target ${report.target}`,
       rootCause: f.rootCause || f.summary,
       suggestedFix: f.suggestedFix,
       aiPrompt: f.aiPrompt || `Refactor ${f.failingFile || 'handler'} to satisfy ACID invariant: ${f.title}.`,

@@ -1,4 +1,4 @@
-# 00 — Acidtest Master Architecture & Systems Specification
+﻿# 00 — Acidtest Master Architecture & Systems Specification
 
 ## 1. System Mission & Core Paradigm
 `Acidtest` is an adversarial backend reliability, security, and chaos-testing suite designed to audit distributed web applications, databases, payment gateways, and asynchronous pipelines against the universal laws of **Atomicity**, **Consistency**, **Isolation**, and **Durability (ACID)**.
@@ -21,26 +21,26 @@ acidtest/
 ├── specs/                         -> Complete architectural specification suite
 │
 ├── packages/
-│   ├── cli/                       -> @acidtest/cli (Global terminal entrypoint)
-│   ├── core/                      -> @acidtest/core (Logging, crypto, assertions, runner harness)
-│   ├── billing/                   -> @acidtest/billing (Stripe, LemonSqueezy, Paddle, Shopify engine)
-│   ├── db/                        -> @acidtest/db (PostgreSQL, Supabase, RLS, SQL AST auditor)
-│   ├── auth/                      -> @acidtest/auth (Clerk, Supabase Auth, NextAuth penetration)
-│   ├── queue/                     -> @acidtest/queue (BullMQ, Redis, SQS chaos engine)
-│   ├── webhook/                   -> @acidtest/webhook (Ingress, raw-buffer, HMAC re-signer)
-│   ├── ai/                        -> @acidtest/ai (OpenAI, Anthropic SSE, schema drift guard)
-│   ├── email/                     -> @acidtest/email (Resend, Postmark delivery & template lint)
-│   └── storage/                   -> @acidtest/storage (S3, Cloudflare R2 presigned token auditor)
+│   ├── cli/                       -> @acid-test/cli (Global terminal entrypoint)
+│   ├── core/                      -> @acid-test/core (Logging, crypto, assertions, runner harness)
+│   ├── billing/                   -> @acid-test/billing (Stripe, LemonSqueezy, Paddle, Shopify engine)
+│   ├── db/                        -> @acid-test/db (PostgreSQL, Supabase, RLS, SQL AST auditor)
+│   ├── auth/                      -> @acid-test/auth (Clerk, Supabase Auth, NextAuth penetration)
+│   ├── queue/                     -> @acid-test/queue (BullMQ, Redis, SQS chaos engine)
+│   ├── webhook/                   -> @acid-test/webhook (Ingress, raw-buffer, HMAC re-signer)
+│   ├── ai/                        -> @acid-test/ai (OpenAI, Anthropic SSE, schema drift guard)
+│   ├── email/                     -> @acid-test/email (Resend, Postmark delivery & template lint)
+│   └── storage/                   -> @acid-test/storage (S3, Cloudflare R2 presigned token auditor)
 │
 └── apps/
-    └── studio/                    -> @acidtest/studio (Local visual web UI on localhost:4400)
+    └── studio/                    -> @acid-test/studio (Local visual web UI on localhost:4400)
 ```
 
 ---
 
 ## 3. Core Execution Lifecycle
 
-Every execution of `npx @acidtest/cli <module> [flags]` follows a strict 6-stage lifecycle:
+Every execution of `npx @acid-test/cli <module> [flags]` follows a strict 6-stage lifecycle:
 
 ```mermaid
 flowchart TD

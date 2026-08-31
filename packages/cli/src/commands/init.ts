@@ -1,4 +1,4 @@
-import fs from 'node:fs';
+﻿import fs from 'node:fs';
 import path from 'node:path';
 import pc from 'picocolors';
 
@@ -30,6 +30,6 @@ export async function runInitCommand(): Promise<number> {
 
   fs.writeFileSync(configFile, JSON.stringify(sampleConfig, null, 2), 'utf8');
   console.log(pc.green(`✓ Created acidtest.config.json in current directory.`));
-  console.log(pc.dim(`  Run 'npx @acidtest/cli' to execute your first adversarial reliability audit.`));
+  console.log(pc.dim(`  Run 'npx @acid-test/cli' to execute your first adversarial reliability audit.`));
   return 0;
 }

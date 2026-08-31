@@ -1,4 +1,4 @@
-# 06 — AI Gateway & Streaming Specification (`@acidtest/ai`)
+﻿# 06 — AI Gateway & Streaming Specification (`@acid-test/ai`)
 
 ## 1. Scope & Target Providers
 This module audits AI chat endpoints, streaming Server-Sent Events (SSE), structured output parsers, and token rate-limiting gateways.

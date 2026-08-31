@@ -1,18 +1,18 @@
-{
+﻿{
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@acidtest/core": ["./packages/core/src/index.ts"],
-      "@acidtest/billing": ["./packages/billing/src/index.ts"],
-      "@acidtest/db": ["./packages/db/src/index.ts"],
-      "@acidtest/auth": ["./packages/auth/src/index.ts"],
-      "@acidtest/queue": ["./packages/queue/src/index.ts"],
-      "@acidtest/webhook": ["./packages/webhook/src/index.ts"],
-      "@acidtest/ai": ["./packages/ai/src/index.ts"],
-      "@acidtest/email": ["./packages/email/src/index.ts"],
-      "@acidtest/storage": ["./packages/storage/src/index.ts"],
-      "@acidtest/cli": ["./packages/cli/src/index.ts"]
+      "@acid-test/core": ["./packages/core/src/index.ts"],
+      "@acid-test/billing": ["./packages/billing/src/index.ts"],
+      "@acid-test/db": ["./packages/db/src/index.ts"],
+      "@acid-test/auth": ["./packages/auth/src/index.ts"],
+      "@acid-test/queue": ["./packages/queue/src/index.ts"],
+      "@acid-test/webhook": ["./packages/webhook/src/index.ts"],
+      "@acid-test/ai": ["./packages/ai/src/index.ts"],
+      "@acid-test/email": ["./packages/email/src/index.ts"],
+      "@acid-test/storage": ["./packages/storage/src/index.ts"],
+      "@acid-test/cli": ["./packages/cli/src/index.ts"]
     }
   },
   "include": [

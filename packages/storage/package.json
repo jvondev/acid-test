@@ -1,5 +1,5 @@
-{
-  "name": "@acidtest/storage",
+﻿{
+  "name": "@acid-test/storage",
   "version": "1.0.0",
   "description": "Object storage security auditor supporting AWS S3, Cloudflare R2, and Supabase Storage for Acidtest",
   "main": "./dist/index.js",
@@ -21,7 +21,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@acidtest/core": "workspace:*"
+    "@acid-test/core": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.13.9",

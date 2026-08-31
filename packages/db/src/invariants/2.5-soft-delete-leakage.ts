@@ -1,9 +1,9 @@
-import {
+﻿import {
   type InvariantTest,
   type ExecutionContext,
   type InvariantResult,
   SqlAstParser,
-} from '@acidtest/core';
+} from '@acid-test/core';
 
 export class SoftDeleteLeakageTest implements InvariantTest {
   id = 'ACID-DB-005';

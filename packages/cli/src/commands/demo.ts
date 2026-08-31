@@ -1,6 +1,6 @@
-import pc from 'picocolors';
-import { SandboxServer, TestRunner, TerminalReporter } from '@acidtest/core';
-import { createBillingSuite } from '@acidtest/billing';
+﻿import pc from 'picocolors';
+import { SandboxServer, TestRunner, TerminalReporter } from '@acid-test/core';
+import { createBillingSuite } from '@acid-test/billing';
 
 export async function runDemoCommand(): Promise<number> {
   const width = 85;

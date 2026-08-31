@@ -1,5 +1,5 @@
-{
-  "name": "@acidtest/auth",
+﻿{
+  "name": "@acid-test/auth",
   "version": "1.0.0",
   "description": "Identity and auth auditor supporting Clerk, Supabase Auth, NextAuth, Auth0, and WorkOS for Acidtest",
   "main": "./dist/index.js",
@@ -21,7 +21,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@acidtest/core": "workspace:*"
+    "@acid-test/core": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.13.9",

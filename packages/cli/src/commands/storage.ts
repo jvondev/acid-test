@@ -1,6 +1,6 @@
-import pc from 'picocolors';
-import { TestRunner, TerminalReporter } from '@acidtest/core';
-import { createStorageSuite } from '@acidtest/storage';
+﻿import pc from 'picocolors';
+import { TestRunner, TerminalReporter } from '@acid-test/core';
+import { createStorageSuite } from '@acid-test/storage';
 import type { AuditOptions } from './audit.js';
 
 export async function runStorageCommand(options: AuditOptions & { provider?: string }): Promise<number> {

@@ -1,6 +1,6 @@
-import React from 'react';
+﻿import React from 'react';
 import { Box, Text } from 'ink';
-import type { InvariantResult } from '@acidtest/core';
+import type { InvariantResult } from '@acid-test/core';
 import { THEME, safeTruncate } from '../theme.js';
 import { getCodeDiffForInvariant } from '../code-diff-generator.js';
 

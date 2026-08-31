@@ -1,6 +1,6 @@
-import pc from 'picocolors';
-import { TestRunner, TerminalReporter } from '@acidtest/core';
-import { createQueueSuite } from '@acidtest/queue';
+﻿import pc from 'picocolors';
+import { TestRunner, TerminalReporter } from '@acid-test/core';
+import { createQueueSuite } from '@acid-test/queue';
 import type { AuditOptions } from './audit.js';
 
 export async function runQueueCommand(options: AuditOptions & { provider?: string }): Promise<number> {

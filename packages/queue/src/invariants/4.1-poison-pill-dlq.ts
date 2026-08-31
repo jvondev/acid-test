@@ -1,10 +1,10 @@
-import {
+﻿import {
   type InvariantTest,
   type ExecutionContext,
   type InvariantResult,
   RawBufferUtils,
   MicrosecondBurstDispatcher,
-} from '@acidtest/core';
+} from '@acid-test/core';
 
 export class PoisonPillDlqTest implements InvariantTest {
   id = 'ACID-QUEUE-001';

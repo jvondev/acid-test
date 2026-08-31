@@ -1,4 +1,4 @@
-# 07 — Email & Communication Specification (`@acidtest/email`)
+﻿# 07 — Email & Communication Specification (`@acid-test/email`)
 
 ## 1. Scope & Target Providers
 This module audits transactional emails, React Email components, template parameter bindings, and delivery failure guards.

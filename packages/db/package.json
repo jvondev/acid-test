@@ -1,5 +1,5 @@
-{
-  "name": "@acidtest/db",
+﻿{
+  "name": "@acid-test/db",
   "version": "1.0.0",
   "description": "Production database auditor supporting PostgreSQL, Supabase, Neon, Drizzle, and Prisma for Acidtest",
   "main": "./dist/index.js",
@@ -21,7 +21,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@acidtest/core": "workspace:*"
+    "@acid-test/core": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.13.9",

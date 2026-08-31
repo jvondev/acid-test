@@ -1,4 +1,4 @@
-import type { InvariantSuite, InvariantTest } from '@acidtest/core';
+﻿import type { InvariantSuite, InvariantTest } from '@acid-test/core';
 import { ConcurrentWebhookBurstTest } from './invariants/1.1-concurrent-webhook-burst.js';
 import { MutatedPayloadTamperTest } from './invariants/1.2-mutated-payload-tamper.js';
 import { DunningTimeTravelTest } from './invariants/1.3-dunning-time-travel.js';

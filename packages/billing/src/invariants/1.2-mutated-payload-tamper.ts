@@ -1,11 +1,11 @@
-import {
+﻿import {
   type InvariantTest,
   type ExecutionContext,
   type InvariantResult,
   MicrosecondBurstDispatcher,
   MultiProviderHmacEngine,
   RawBufferUtils,
-} from '@acidtest/core';
+} from '@acid-test/core';
 
 export class MutatedPayloadTamperTest implements InvariantTest {
   id = 'ACID-BILLING-002';

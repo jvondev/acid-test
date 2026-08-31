@@ -1,9 +1,9 @@
-import {
+﻿import {
   type InvariantTest,
   type ExecutionContext,
   type InvariantResult,
   ConnectionPoolHarness,
-} from '@acidtest/core';
+} from '@acid-test/core';
 
 export class RlsPenetrationMatrixTest implements InvariantTest {
   id = 'ACID-DB-001';

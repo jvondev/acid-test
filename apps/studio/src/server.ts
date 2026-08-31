@@ -1,17 +1,17 @@
-import http from 'node:http';
+﻿import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import pc from 'picocolors';
 import { renderStudioHtml } from './client.js';
-import { createBillingSuite } from '@acidtest/billing';
-import { createDbSuite } from '@acidtest/db';
-import { createAuthSuite } from '@acidtest/auth';
-import { createQueueSuite } from '@acidtest/queue';
-import { createWebhookSuite } from '@acidtest/webhook';
-import { createAiSuite } from '@acidtest/ai';
-import { createEmailSuite } from '@acidtest/email';
-import { createStorageSuite } from '@acidtest/storage';
-import { TestRunner } from '@acidtest/core';
+import { createBillingSuite } from '@acid-test/billing';
+import { createDbSuite } from '@acid-test/db';
+import { createAuthSuite } from '@acid-test/auth';
+import { createQueueSuite } from '@acid-test/queue';
+import { createWebhookSuite } from '@acid-test/webhook';
+import { createAiSuite } from '@acid-test/ai';
+import { createEmailSuite } from '@acid-test/email';
+import { createStorageSuite } from '@acid-test/storage';
+import { TestRunner } from '@acid-test/core';
 
 export interface StudioServerOptions {
   port?: number;

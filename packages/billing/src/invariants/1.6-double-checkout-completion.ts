@@ -1,10 +1,10 @@
-import {
+﻿import {
   type InvariantTest,
   type ExecutionContext,
   type InvariantResult,
   MicrosecondBurstDispatcher,
   MultiProviderHmacEngine,
-} from '@acidtest/core';
+} from '@acid-test/core';
 
 export class DoubleCheckoutCompletionTest implements InvariantTest {
   id = 'ACID-BILLING-006';

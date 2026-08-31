@@ -1,4 +1,4 @@
-import type { InvariantSuite, InvariantTest } from '@acidtest/core';
+﻿import type { InvariantSuite, InvariantTest } from '@acid-test/core';
 import { PoisonPillDlqTest } from './invariants/4.1-poison-pill-dlq.js';
 import { SigkillStalledRecoveryTest } from './invariants/4.2-sigkill-stalled-recovery.js';
 import { RetryStormBackoffTest } from './invariants/4.3-retry-storm-backoff.js';

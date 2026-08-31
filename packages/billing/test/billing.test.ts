@@ -1,8 +1,8 @@
-import { describe, it, expect, beforeAll, afterAll } from 'vitest';
-import { SandboxServer, TestRunner } from '@acidtest/core';
+﻿import { describe, it, expect, beforeAll, afterAll } from 'vitest';
+import { SandboxServer, TestRunner } from '@acid-test/core';
 import { createBillingSuite } from '../src/suite.js';
 
-describe('@acidtest/billing', () => {
+describe('@acid-test/billing', () => {
   let server: SandboxServer;
   let targetUrl: string;
 

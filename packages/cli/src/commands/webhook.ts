@@ -1,6 +1,6 @@
-import pc from 'picocolors';
-import { TestRunner, TerminalReporter } from '@acidtest/core';
-import { createWebhookSuite } from '@acidtest/webhook';
+﻿import pc from 'picocolors';
+import { TestRunner, TerminalReporter } from '@acid-test/core';
+import { createWebhookSuite } from '@acid-test/webhook';
 import type { AuditOptions } from './audit.js';
 
 export async function runWebhookCommand(options: AuditOptions & { provider?: string }): Promise<number> {

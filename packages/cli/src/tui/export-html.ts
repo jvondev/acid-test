@@ -1,7 +1,7 @@
-import fs from 'node:fs';
+﻿import fs from 'node:fs';
 import path from 'node:path';
-import type { InvariantResult, AuditReport } from '@acidtest/core';
-import { HtmlReporter, FinancialRiskCalculator } from '@acidtest/core';
+import type { InvariantResult, AuditReport } from '@acid-test/core';
+import { HtmlReporter, FinancialRiskCalculator } from '@acid-test/core';
 
 export function exportHtmlAuditReport(results: InvariantResult[], targetUrl: string): string | null {
   try {

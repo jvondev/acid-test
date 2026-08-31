@@ -1,0 +1,42 @@
+{
+  "name": "@acidtest/studio",
+  "version": "1.0.0",
+  "description": "Zero-config local visual dashboard on localhost:4400 for Acidtest",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "start": "node ./dist/bin/server.js",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "@acidtest/core": "workspace:*",
+    "@acidtest/billing": "workspace:*",
+    "@acidtest/db": "workspace:*",
+    "@acidtest/auth": "workspace:*",
+    "@acidtest/queue": "workspace:*",
+    "@acidtest/webhook": "workspace:*",
+    "@acidtest/ai": "workspace:*",
+    "@acidtest/email": "workspace:*",
+    "@acidtest/storage": "workspace:*",
+    "picocolors": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.9",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.7",
+    "rimraf": "^6.0.1"
+  }
+}

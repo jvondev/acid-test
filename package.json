@@ -1,23 +1,41 @@
 {
-  "name": "acidtest",
-  "version": "0.0.1",
-  "description": "The definitive ACID reliability and resilience audit suite for backend systems, databases, and billing.",
+  "name": "acidtest-monorepo",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "description": "Adversarial backend reliability, security, and chaos-testing suite for modern distributed backends",
   "main": "index.js",
   "bin": {
     "acidtest": "./bin/cli.js"
   },
   "scripts": {
-    "start": "node ./bin/cli.js"
+    "build": "turbo run build",
+    "test": "vitest run",
+    "typecheck": "turbo run typecheck",
+    "dev": "turbo run dev",
+    "clean": "turbo run clean",
+    "cli": "node ./bin/cli.js",
+    "studio": "node ./apps/studio/dist/bin/server.js"
   },
   "keywords": [
-    "backend",
     "acid",
+    "chaos-engineering",
+    "reliability",
+    "security",
     "testing",
-    "database",
     "stripe",
-    "resilience",
-    "chaos-engineering"
+    "postgres",
+    "webhook",
+    "idempotency",
+    "adversarial"
   ],
   "author": "jvondev",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.13.9",
+    "turbo": "^2.4.4",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.7"
+  },
+  "packageManager": "pnpm@10.14.0"
 }

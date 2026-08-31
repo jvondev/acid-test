@@ -18,9 +18,8 @@ out/
 .env.staging
 
 # Acidtest local run logs and reports
-.acidtest/reports/
-.acidtest/remediation.json
-.acidtest/runs/
+.acidtest/
+**/.acidtest/
 
 # Logs
 logs/

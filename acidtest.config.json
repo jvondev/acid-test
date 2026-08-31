@@ -1,0 +1,27 @@
+{
+  "$schema": "https://acidtest.dev/schema.json",
+  "target": {
+    "url": "http://localhost:3000",
+    "database": "postgresql://postgres:postgres@localhost:5432/mydb",
+    "redis": "redis://localhost:6379"
+  },
+  "fuzzer": {
+    "concurrency": 10,
+    "jitterMs": 5,
+    "timeoutMs": 8000
+  },
+  "financial": {
+    "monthlyGmvUsd": 450000,
+    "averageOrderValueUsd": 50
+  },
+  "modules": [
+    "billing",
+    "db",
+    "auth",
+    "queue",
+    "webhook",
+    "ai",
+    "email",
+    "storage"
+  ]
+}

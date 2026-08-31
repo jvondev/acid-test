@@ -1,0 +1,48 @@
+{
+  "name": "@acidtest/core",
+  "version": "1.0.0",
+  "description": "Core test runner, concurrent microsecond burst fuzzer, crypto engine, and dual-layer reporter for Acidtest",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./worker": {
+      "types": "./dist/fuzzer/worker.d.ts",
+      "import": "./dist/fuzzer/worker.mjs",
+      "require": "./dist/fuzzer/worker.js",
+      "default": "./dist/fuzzer/worker.js"
+    },
+    "./sandbox": {
+      "types": "./dist/sandbox/index.d.ts",
+      "import": "./dist/sandbox/index.mjs",
+      "require": "./dist/sandbox/index.js",
+      "default": "./dist/sandbox/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "picocolors": "^1.1.1",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.9",
+    "@types/pg": "^8.11.11",
+    "pg": "^8.13.3",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.7",
+    "rimraf": "^6.0.1"
+  }
+}

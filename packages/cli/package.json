@@ -1,0 +1,49 @@
+{
+  "name": "@acidtest/cli",
+  "version": "1.0.0",
+  "description": "Universal CLI runner for Acidtest adversarial reliability and chaos suite",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "acidtest": "./dist/bin/cli.js",
+    "agy-acid": "./dist/bin/cli.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "start": "node ./dist/bin/cli.js",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "@acidtest/core": "workspace:*",
+    "@acidtest/billing": "workspace:*",
+    "@acidtest/db": "workspace:*",
+    "@acidtest/auth": "workspace:*",
+    "@acidtest/queue": "workspace:*",
+    "@acidtest/webhook": "workspace:*",
+    "@acidtest/ai": "workspace:*",
+    "@acidtest/email": "workspace:*",
+    "@acidtest/storage": "workspace:*",
+    "@acidtest/studio": "workspace:*",
+    "commander": "^13.1.0",
+    "picocolors": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.9",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.7",
+    "rimraf": "^6.0.1"
+  }
+}

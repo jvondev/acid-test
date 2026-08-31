@@ -1,0 +1,25 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@acidtest/core": ["./packages/core/src/index.ts"],
+      "@acidtest/billing": ["./packages/billing/src/index.ts"],
+      "@acidtest/db": ["./packages/db/src/index.ts"],
+      "@acidtest/auth": ["./packages/auth/src/index.ts"],
+      "@acidtest/queue": ["./packages/queue/src/index.ts"],
+      "@acidtest/webhook": ["./packages/webhook/src/index.ts"],
+      "@acidtest/ai": ["./packages/ai/src/index.ts"],
+      "@acidtest/email": ["./packages/email/src/index.ts"],
+      "@acidtest/storage": ["./packages/storage/src/index.ts"],
+      "@acidtest/cli": ["./packages/cli/src/index.ts"]
+    }
+  },
+  "include": [
+    "packages/*/src/**/*",
+    "packages/*/test/**/*",
+    "apps/*/src/**/*",
+    "apps/*/test/**/*"
+  ],
+  "exclude": ["node_modules", "dist", ".turbo"]
+}

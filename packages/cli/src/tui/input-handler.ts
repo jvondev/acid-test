@@ -155,13 +155,19 @@ export class InputHandler {
 
   private handleFilterInput(str: string): void {
     const filter = this.engine.getFilterState();
-    if (str === '1') filter.severityFilter = undefined;
-    if (str === '2') filter.severityFilter = 'CRITICAL';
-    if (str === '3') filter.severityFilter = 'HIGH';
-    if (str === '4') filter.severityFilter = 'MEDIUM';
-    if (str === '5') filter.statusFilter = undefined;
-    if (str === '6') filter.statusFilter = 'FAIL';
-    if (str === '7') filter.statusFilter = 'PASS';
+    let changed = false;
+    if (str === '1') { filter.severityFilter = undefined; changed = true; }
+    if (str === '2') { filter.severityFilter = 'CRITICAL'; changed = true; }
+    if (str === '3') { filter.severityFilter = 'HIGH'; changed = true; }
+    if (str === '4') { filter.severityFilter = 'MEDIUM'; changed = true; }
+    if (str === '5') { filter.statusFilter = undefined; changed = true; }
+    if (str === '6') { filter.statusFilter = 'FAIL'; changed = true; }
+    if (str === '7') { filter.statusFilter = 'PASS'; changed = true; }
     if (str === '/') this.engine.setActiveModal('none');
+    if (changed) {
+      this.engine.invalidateFilter();
+      this.engine.setSelectedIndex(0);
+      this.engine.render();
+    }
   }
 }

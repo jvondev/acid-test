@@ -79,23 +79,27 @@ export class MouseHandler {
       }
     }
 
-    // 4. Invariants Left List Click Hit-Testing (y >= 11)
+    // 4. Invariants Left List Click Hit-Testing
     const listStartX = 2;
     const listWidth = Math.max(28, Math.floor((process.stdout.columns || 110) * 0.36));
-    const listStartY = 10; // body start
+    const listStartY = 10;
+    const rows = process.stdout.rows || 32;
+    const height = rows - listStartY - 2;
+    const visibleRows = height - 2;
 
-    if (event.x >= listStartX && event.x <= listStartX + listWidth && event.y > listStartY) {
+    if (event.x >= listStartX && event.x <= listStartX + listWidth && event.y > listStartY && event.y <= listStartY + visibleRows) {
       const clickedRowOffset = event.y - (listStartY + 1);
       const total = this.engine.getFilteredCount();
-      if (clickedRowOffset >= 0 && clickedRowOffset < total) {
-        this.engine.setSelectedIndex(clickedRowOffset);
+      const startIdx = Math.max(0, Math.min(this.engine.getSelectedIndex() - 4, Math.max(0, total - visibleRows)));
+      const targetIdx = startIdx + clickedRowOffset;
+      if (clickedRowOffset >= 0 && targetIdx >= 0 && targetIdx < total) {
+        this.engine.setSelectedIndex(targetIdx);
         this.engine.render();
         return;
       }
     }
 
     // 5. Footer Buttons Click Hit-Testing (y >= rows - 2)
-    const rows = process.stdout.rows || 32;
     if (event.y >= rows - 2) {
       const actions = [
         { label: ' [1-9] Tabs ', action: () => {} },

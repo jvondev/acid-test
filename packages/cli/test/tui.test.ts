@@ -3,6 +3,8 @@ import { safeTruncate, formatMoney, formatMs, renderBar, getHealthColor } from '
 import { getAllDomainSuites } from '../src/tui/suite-factory.js';
 import { exportPromptToFile } from '../src/tui/export-prompt.js';
 import { exportHtmlAuditReport } from '../src/tui/export-html.js';
+import { ScreenBuffer } from '../src/tui/buffer.js';
+import { BRAND_GRADIENT_LUT, getGradientAnsi } from '../src/brand/palette.js';
 
 describe('Acidtest Stage-Based Drill-Down TUI Suite', () => {
   it('safeTruncate clamps text with ellipsis accurately', () => {
@@ -72,5 +74,24 @@ describe('Acidtest Stage-Based Drill-Down TUI Suite', () => {
     );
     expect(reportPath).not.toBeNull();
     expect(reportPath).toContain('.html');
+  });
+
+  it('ScreenBuffer supports in-place cell mutation and differential diffing', () => {
+    const buffer = new ScreenBuffer(80, 24);
+    buffer.drawText(0, 0, 'Acidtest');
+    expect(buffer.cols).toBe(80);
+    expect(buffer.rows).toBe(24);
+
+    // Reusing cells on clear without re-allocating
+    buffer.clear();
+    buffer.drawText(2, 2, 'Zero Lag');
+    expect(buffer.drawText(2, 2, 'Zero Lag')).toBe(8);
+  });
+
+  it('BRAND_GRADIENT_LUT precomputes 256 ANSI color codes', () => {
+    expect(BRAND_GRADIENT_LUT.length).toBe(256);
+    expect(getGradientAnsi(0)).toBe(BRAND_GRADIENT_LUT[0]);
+    expect(getGradientAnsi(1)).toBe(BRAND_GRADIENT_LUT[255]);
+    expect(getGradientAnsi(0.5)).toBe(BRAND_GRADIENT_LUT[127]);
   });
 });

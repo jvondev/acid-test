@@ -17,7 +17,6 @@ import { exportPromptToFile } from './export-prompt.js';
 import { exportHtmlAuditReport } from './export-html.js';
 import { ScreenBuffer } from './buffer.js';
 import { InputHandler } from './input-handler.js';
-import { MouseHandler } from './mouse-handler.js';
 import { HeavyRainEngine } from './rain-engine.js';
 import {
   drawHeader,
@@ -68,7 +67,6 @@ export class RatatuiEngine {
 
   private buffer: ScreenBuffer;
   private inputHandler: InputHandler;
-  private mouseHandler: MouseHandler;
   private rainEngine: HeavyRainEngine;
 
   constructor(options: EngineOptions = {}) {
@@ -77,7 +75,6 @@ export class RatatuiEngine {
     this.targetUrl = options.url || 'http://localhost:3000';
     this.buffer = new ScreenBuffer(cols, rows);
     this.inputHandler = new InputHandler(this);
-    this.mouseHandler = new MouseHandler(this);
     this.rainEngine = new HeavyRainEngine(cols, rows);
     this.allResults = this.initPlaceholderResults();
   }
@@ -104,14 +101,13 @@ export class RatatuiEngine {
   }
 
   public async start(autoRun = true): Promise<void> {
-    // Enter Fullscreen Alternate Buffer, hide cursor, and enable SGR Extended Mouse Tracking
-    process.stdout.write('\x1b[?1049h\x1b[2J\x1b[H\x1b[?25l\x1b[?1000h\x1b[?1002h\x1b[?1006h');
+    // Enter Fullscreen Alternate Buffer and hide cursor (Zero mouse tracking overhead)
+    process.stdout.write('\x1b[?1049h\x1b[2J\x1b[H\x1b[?25l');
 
     readline.emitKeypressEvents(process.stdin);
     if (process.stdin.isTTY) process.stdin.setRawMode(true);
 
     process.stdin.on('keypress', (str, key) => this.inputHandler.handleKeypress(str, key));
-    process.stdin.on('data', (data) => this.mouseHandler.parseAndHandle(data.toString()));
 
     process.stdout.on('resize', () => {
       const cols = process.stdout.columns || 110;
@@ -139,8 +135,8 @@ export class RatatuiEngine {
   public async stop(): Promise<void> {
     if (this.frameTimer) clearInterval(this.frameTimer);
     if (this.sandboxServer) await this.sandboxServer.stop();
-    // Disable Mouse Tracking, show cursor, and restore Main Buffer
-    process.stdout.write('\x1b[?1006l\x1b[?1002l\x1b[?1000l\x1b[?25h\x1b[?1049l\n');
+    // Show cursor and restore Main Buffer cleanly
+    process.stdout.write('\x1b[?25h\x1b[?1049l\n');
     process.exit(0);
   }
 
@@ -153,8 +149,13 @@ export class RatatuiEngine {
     }, 3500);
   }
 
+  private countsCache: Record<TuiTab, number> | null = null;
+  private filteredResultsCache: InvariantResult[] | null = null;
+
   public skipOpeningToCockpit(): void {
     this.viewState = 'COCKPIT';
+    this.buffer.forceRedraw();
+    this.render();
   }
 
   public async runAudit(isOpening = false): Promise<void> {
@@ -250,6 +251,8 @@ export class RatatuiEngine {
 
     const risk = FinancialRiskCalculator.calculate(accumulated);
     this.allResults = accumulated;
+    this.countsCache = null;
+    this.filteredResultsCache = null;
     this.healthScore = risk.healthScore;
     this.healthGrade = risk.healthGrade;
     this.isRunning = false;
@@ -260,6 +263,7 @@ export class RatatuiEngine {
     if (isOpening && this.viewState === 'OPENING') {
       await new Promise((r) => setTimeout(r, 220));
       this.viewState = 'COCKPIT';
+      this.buffer.forceRedraw();
     }
 
     const passed = accumulated.filter((r) => r.status === 'PASS').length;
@@ -293,37 +297,70 @@ export class RatatuiEngine {
   public getActiveModal(): string { return this.activeModal; }
   public setActiveModal(m: 'none' | 'executive' | 'chaos' | 'help' | 'filter'): void { this.activeModal = m; }
   public getCurrentTab(): TuiTab { return this.currentTab; }
-  public setCurrentTab(t: TuiTab): void { this.currentTab = t; }
+  public setCurrentTab(t: TuiTab): void {
+    if (this.currentTab !== t) {
+      this.currentTab = t;
+      this.filteredResultsCache = null;
+    }
+  }
   public getSelectedIndex(): number { return this.selectedIndex; }
   public setSelectedIndex(i: number): void { this.selectedIndex = i; }
   public getChaosConfig(): ChaosConfig { return this.chaosConfig; }
   public getFilterState(): FilterState { return this.filterState; }
+  public invalidateFilter(): void { this.filteredResultsCache = null; }
   public getFilteredCount(): number { return this.getFilteredResults().length; }
 
   public getCounts(): Record<TuiTab, number> {
-    return {
+    if (this.countsCache) return this.countsCache;
+
+    const counts: Record<TuiTab, number> = {
       overview: this.allResults.length,
-      billing: this.allResults.filter((r) => r.category.toLowerCase().includes('billing')).length,
-      db: this.allResults.filter((r) => r.category.toLowerCase().includes('db')).length,
-      auth: this.allResults.filter((r) => r.category.toLowerCase().includes('auth')).length,
-      queue: this.allResults.filter((r) => r.category.toLowerCase().includes('queue')).length,
-      webhook: this.allResults.filter((r) => r.category.toLowerCase().includes('webhook')).length,
-      ai: this.allResults.filter((r) => r.category.toLowerCase().includes('ai')).length,
-      email: this.allResults.filter((r) => r.category.toLowerCase().includes('email')).length,
-      storage: this.allResults.filter((r) => r.category.toLowerCase().includes('storage')).length,
+      billing: 0,
+      db: 0,
+      auth: 0,
+      queue: 0,
+      webhook: 0,
+      ai: 0,
+      email: 0,
+      storage: 0,
     };
+
+    for (let i = 0; i < this.allResults.length; i++) {
+      const cat = this.allResults[i].category.toLowerCase();
+      if (cat.includes('billing')) counts.billing++;
+      else if (cat.includes('db')) counts.db++;
+      else if (cat.includes('auth')) counts.auth++;
+      else if (cat.includes('queue')) counts.queue++;
+      else if (cat.includes('webhook')) counts.webhook++;
+      else if (cat.includes('ai')) counts.ai++;
+      else if (cat.includes('email')) counts.email++;
+      else if (cat.includes('storage')) counts.storage++;
+    }
+
+    this.countsCache = counts;
+    return counts;
   }
 
   private getFilteredResults(): InvariantResult[] {
-    const raw = this.allResults.filter((r) => {
+    if (this.filteredResultsCache) return this.filteredResultsCache;
+
+    const failures: InvariantResult[] = [];
+    const passes: InvariantResult[] = [];
+
+    for (let i = 0; i < this.allResults.length; i++) {
+      const r = this.allResults[i];
       const tabMatch = this.currentTab === 'overview' || r.category.toLowerCase().includes(this.currentTab);
       const statusMatch = !this.filterState.statusFilter || r.status === this.filterState.statusFilter;
       const sevMatch = !this.filterState.severityFilter || r.severity === this.filterState.severityFilter;
-      return tabMatch && statusMatch && sevMatch;
-    });
-    const failures = raw.filter((r) => r.status === 'FAIL');
-    const passes = raw.filter((r) => r.status !== 'FAIL');
-    return [...failures, ...passes];
+
+      if (tabMatch && statusMatch && sevMatch) {
+        if (r.status === 'FAIL') failures.push(r);
+        else passes.push(r);
+      }
+    }
+
+    this.filteredResultsCache = [...failures, ...passes];
+    return this.filteredResultsCache;
   }
 
   public render(): void {

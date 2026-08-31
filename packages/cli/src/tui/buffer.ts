@@ -1,6 +1,6 @@
-// 🏛️ ACIDTEST 2D SCREEN BUFFER (ATOMIC SYNCHRONIZED MATRIX)
-// Under 160 lines - DEC Mode 2026 Synchronized Output & Dirty Cell Differential Engine
-// Completely eliminates cursor jumping, screen tearing, and mid-stream redraw flicker
+// 🏛️ ACIDTEST 2D SCREEN BUFFER (HIGH-PERFORMANCE DIFFERENTIAL RASTERIZER)
+// Zero-Allocation In-Place Cell Pool, Double-Buffering & DEC Mode 2026 Synchronized Output
+// Eliminates CPU lag, pipe saturation, and screen tearing with O(dirty_cells) delta rasterization
 
 export interface CellStyle {
   fg?: string;
@@ -23,6 +23,7 @@ export class ScreenBuffer {
   private currentGrid: Cell[][];
   private previousGrid: Cell[][];
   private isDirty = true;
+  private forceFullRedraw = true;
 
   constructor(cols: number, rows: number) {
     this.cols = Math.max(40, cols);
@@ -45,8 +46,14 @@ export class ScreenBuffer {
 
   public clear(): void {
     for (let y = 0; y < this.rows; y++) {
+      const row = this.currentGrid[y];
       for (let x = 0; x < this.cols; x++) {
-        this.currentGrid[y][x] = { char: ' ' };
+        const cell = row[x];
+        cell.char = ' ';
+        cell.fg = undefined;
+        cell.bg = undefined;
+        cell.bold = undefined;
+        cell.dim = undefined;
       }
     }
     this.isDirty = true;
@@ -57,18 +64,23 @@ export class ScreenBuffer {
     this.rows = Math.max(10, rows);
     this.currentGrid = this.createEmptyGrid();
     this.previousGrid = this.createEmptyGrid();
+    this.forceFullRedraw = true;
+    this.isDirty = true;
+  }
+
+  public forceRedraw(): void {
+    this.forceFullRedraw = true;
     this.isDirty = true;
   }
 
   public setCell(x: number, y: number, char: string, style: CellStyle = {}): void {
     if (x < 0 || x >= this.cols || y < 0 || y >= this.rows) return;
-    this.currentGrid[y][x] = {
-      char: char || ' ',
-      fg: style.fg,
-      bg: style.bg,
-      bold: style.bold,
-      dim: style.dim,
-    };
+    const cell = this.currentGrid[y][x];
+    cell.char = char || ' ';
+    cell.fg = style.fg;
+    cell.bg = style.bg;
+    cell.bold = style.bold;
+    cell.dim = style.dim;
     this.isDirty = true;
   }
 
@@ -124,8 +136,9 @@ export class ScreenBuffer {
   }
 
   /**
-   * Flushes the buffer using DEC Mode 2026 Synchronized Output.
-   * Locks the terminal rasterizer so the GPU paints the frame atomically with 0 cursor jumping.
+   * Flushes the buffer using DEC Mode 2026 Synchronized Output and Double-Buffered Differential Diffing.
+   * Only emits cursor jumps and ANSI sequences for cells that actually changed since last frame.
+   * If zero cells changed, 0 bytes are emitted to stdout.
    */
   public flush(): void {
     if (!this.isDirty) return;
@@ -133,25 +146,74 @@ export class ScreenBuffer {
     const SYNC_BEGIN = '\x1b[?2026h'; // DEC Mode 2026: Begin Synchronized Output
     const SYNC_END   = '\x1b[?2026l'; // DEC Mode 2026: End Synchronized Output
     const HIDE_CURSOR = '\x1b[?25l';
-    const HOME_CURSOR = '\x1b[H';
     const RESET       = '\x1b[0m';
 
-    let out = SYNC_BEGIN + HIDE_CURSOR + HOME_CURSOR;
+    let out = '';
     let currentFg = '';
     let currentBg = '';
     let currentBold = false;
     let currentDim = false;
 
-    for (let y = 0; y < this.rows; y++) {
-      for (let x = 0; x < this.cols; x++) {
-        const cell = this.currentGrid[y][x];
+    let cursorX = -1;
+    let cursorY = -1;
+    let hasChanges = false;
 
-        if (cell.bold !== currentBold || cell.dim !== currentDim || cell.fg !== currentFg || cell.bg !== currentBg) {
+    const isFull = this.forceFullRedraw;
+
+    for (let y = 0; y < this.rows; y++) {
+      const curRow = this.currentGrid[y];
+      const prevRow = this.previousGrid[y];
+
+      for (let x = 0; x < this.cols; x++) {
+        const curCell = curRow[x];
+        const prevCell = prevRow[x];
+
+        // Differential check: skip if identical to previous frame
+        if (
+          !isFull &&
+          curCell.char === prevCell.char &&
+          curCell.fg === prevCell.fg &&
+          curCell.bg === prevCell.bg &&
+          curCell.bold === prevCell.bold &&
+          curCell.dim === prevCell.dim
+        ) {
+          continue;
+        }
+
+        if (!hasChanges) {
+          hasChanges = true;
+          out += SYNC_BEGIN + HIDE_CURSOR;
+          if (isFull) {
+            out += '\x1b[2J\x1b[H';
+            cursorX = 0;
+            cursorY = 0;
+          }
+        }
+
+        // Jump cursor if not positioned at target cell
+        if (cursorX !== x || cursorY !== y) {
+          out += `\x1b[${y + 1};${x + 1}H`;
+          cursorX = x;
+          cursorY = y;
+        }
+
+        // Apply style changes only when style delta occurs
+        const targetFg = curCell.fg || '';
+        const targetBg = curCell.bg || '';
+        const targetBold = !!curCell.bold;
+        const targetDim = !!curCell.dim;
+
+        if (
+          targetFg !== currentFg ||
+          targetBg !== currentBg ||
+          targetBold !== currentBold ||
+          targetDim !== currentDim
+        ) {
           out += RESET;
-          currentFg = cell.fg || '';
-          currentBg = cell.bg || '';
-          currentBold = cell.bold || false;
-          currentDim = cell.dim || false;
+          currentFg = targetFg;
+          currentBg = targetBg;
+          currentBold = targetBold;
+          currentDim = targetDim;
 
           if (currentBold) out += '\x1b[1m';
           if (currentDim) out += '\x1b[2m';
@@ -159,15 +221,24 @@ export class ScreenBuffer {
           if (currentBg) out += currentBg;
         }
 
-        out += cell.char;
-      }
-      if (y < this.rows - 1) {
-        out += '\n';
+        out += curCell.char;
+        cursorX++;
+
+        // Update previous frame cell cache
+        prevCell.char = curCell.char;
+        prevCell.fg = curCell.fg;
+        prevCell.bg = curCell.bg;
+        prevCell.bold = curCell.bold;
+        prevCell.dim = curCell.dim;
       }
     }
-    out += RESET + SYNC_END;
 
-    process.stdout.write(out);
+    if (hasChanges) {
+      out += RESET + SYNC_END;
+      process.stdout.write(out);
+    }
+
+    this.forceFullRedraw = false;
     this.isDirty = false;
   }
 }

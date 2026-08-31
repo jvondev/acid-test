@@ -45,7 +45,31 @@ export function interpolateRgb(
   ];
 }
 
+// Precomputed 256-step ANSI Gradient Lookup Table for Zero-Allocation O(1) Color Interpolation
+function buildGradientLut(palette: readonly [number, number, number][], steps = 256): string[] {
+  const lut: string[] = new Array(steps);
+  const segs = palette.length - 1;
+  for (let i = 0; i < steps; i++) {
+    const t = i / (steps - 1);
+    const p = t * segs;
+    const idx = Math.min(Math.floor(p), segs - 1);
+    const localP = p - idx;
+    const [r, g, b] = interpolateRgb(palette[idx], palette[idx + 1], localP);
+    lut[i] = `\x1b[38;2;${r};${g};${b}m`;
+  }
+  return lut;
+}
+
+export const BRAND_GRADIENT_LUT = buildGradientLut(BRAND_COLORS.gradient, 256);
+
 export function getGradientAnsi(t: number, palette = BRAND_COLORS.gradient): string {
+  if (palette === BRAND_COLORS.gradient) {
+    if (t <= 0) return BRAND_GRADIENT_LUT[0];
+    if (t >= 1) return BRAND_GRADIENT_LUT[255];
+    const idx = (t * 255) | 0;
+    return BRAND_GRADIENT_LUT[idx];
+  }
+
   const clamped = Math.max(0, Math.min(1, t));
   const segs = palette.length - 1;
   const p = clamped * segs;

@@ -1,0 +1,23 @@
+{
+  "name": "acidtest",
+  "version": "0.0.1",
+  "description": "The definitive ACID reliability and resilience audit suite for backend systems, databases, and billing.",
+  "main": "index.js",
+  "bin": {
+    "acidtest": "./bin/cli.js"
+  },
+  "scripts": {
+    "start": "node ./bin/cli.js"
+  },
+  "keywords": [
+    "backend",
+    "acid",
+    "testing",
+    "database",
+    "stripe",
+    "resilience",
+    "chaos-engineering"
+  ],
+  "author": "jvondev",
+  "license": "MIT"
+}

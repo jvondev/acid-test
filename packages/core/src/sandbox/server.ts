@@ -85,7 +85,7 @@ export class SandboxServer {
               this.activeStreamsCount--;
               res.end('data: [DONE]\n\n');
             }
-          }, 100);
+          }, 20);
           req.on('close', () => {
             if (this.mode === 'hardened') {
               clearInterval(interval);

@@ -46,19 +46,21 @@ export class InputHandler {
     }
 
     // 1. Horizontal Domain Tab Navigation (Left / Right Arrow or 1-9)
-    if (key.name === 'left') {
+    if (key?.name === 'left' || str === '\x1b[D') {
       const currentIdx = DOMAIN_TABS.findIndex((t) => t.id === this.engine.getCurrentTab());
       const prevIdx = (currentIdx - 1 + DOMAIN_TABS.length) % DOMAIN_TABS.length;
       this.engine.setCurrentTab(DOMAIN_TABS[prevIdx].id);
       this.engine.setSelectedIndex(0);
+      this.engine.render();
       return;
     }
 
-    if (key.name === 'right') {
+    if (key?.name === 'right' || str === '\x1b[C') {
       const currentIdx = DOMAIN_TABS.findIndex((t) => t.id === this.engine.getCurrentTab());
       const nextIdx = (currentIdx + 1) % DOMAIN_TABS.length;
       this.engine.setCurrentTab(DOMAIN_TABS[nextIdx].id);
       this.engine.setSelectedIndex(0);
+      this.engine.render();
       return;
     }
 
@@ -66,58 +68,73 @@ export class InputHandler {
     if (!isNaN(tabIdx) && tabIdx >= 1 && tabIdx <= 9) {
       this.engine.setCurrentTab(DOMAIN_TABS[tabIdx - 1].id);
       this.engine.setSelectedIndex(0);
+      this.engine.render();
       return;
     }
 
     // 2. Vertical Invariants Navigation (Up / Down Arrow or j / k)
     const total = this.engine.getFilteredCount();
-    if (key.name === 'up' || str === 'k') {
-      this.engine.setSelectedIndex(Math.max(0, this.engine.getSelectedIndex() - 1));
+    if (key?.name === 'up' || str === 'k' || str === '\x1b[A') {
+      if (total > 0) {
+        this.engine.setSelectedIndex(Math.max(0, this.engine.getSelectedIndex() - 1));
+      }
+      this.engine.render();
       return;
     }
-    if (key.name === 'down' || str === 'j') {
-      this.engine.setSelectedIndex(Math.min(Math.max(0, total - 1), this.engine.getSelectedIndex() + 1));
+    if (key?.name === 'down' || str === 'j' || str === '\x1b[B') {
+      if (total > 0) {
+        this.engine.setSelectedIndex(Math.min(Math.max(0, total - 1), this.engine.getSelectedIndex() + 1));
+      }
+      this.engine.render();
       return;
     }
 
     // 3. Actions
     if (str === 'p' || str === 'P') {
       this.engine.triggerAiPromptExport();
+      this.engine.render();
       return;
     }
 
-    if (key.name === 'return') {
+    if (key?.name === 'return') {
       this.engine.showToast(`Inspecting selected invariant`);
+      this.engine.render();
       return;
     }
 
-    if (key.name === 'space' || str === 'a' || str === 'A') {
+    if (key?.name === 'space' || str === 'a' || str === 'A') {
       this.engine.runAudit();
+      this.engine.render();
       return;
     }
 
     if (str === 'v' || str === 'V') {
       this.engine.setActiveModal('executive');
+      this.engine.render();
       return;
     }
 
     if (str === 'c' || str === 'C') {
       this.engine.setActiveModal('chaos');
+      this.engine.render();
       return;
     }
 
     if (str === '/') {
       this.engine.setActiveModal('filter');
+      this.engine.render();
       return;
     }
 
     if (str === '?' || str === 'h') {
       this.engine.setActiveModal('help');
+      this.engine.render();
       return;
     }
 
     if (str === 'H') {
       this.engine.exportHtmlReport();
+      this.engine.render();
       return;
     }
   }

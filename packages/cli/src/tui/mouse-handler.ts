@@ -60,8 +60,8 @@ export class MouseHandler {
     // Only process primary left-click down
     if (event.isRelease || event.button !== 0) return;
 
-    // 3. Tab Bar Click Hit-Testing (y = 6)
-    if (event.y === 6) {
+    // 3. Tab Bar Click Hit-Testing (y = 8)
+    if (event.y === 8) {
       let curX = 2;
       const counts = this.engine.getCounts();
 
@@ -72,22 +72,24 @@ export class MouseHandler {
         if (event.x >= curX && event.x < curX + labelLen) {
           this.engine.setCurrentTab(tab.id);
           this.engine.setSelectedIndex(0);
+          this.engine.render();
           return;
         }
         curX += labelLen + 1;
       }
     }
 
-    // 4. Invariants Left List Click Hit-Testing (y >= 9)
+    // 4. Invariants Left List Click Hit-Testing (y >= 11)
     const listStartX = 2;
     const listWidth = Math.max(28, Math.floor((process.stdout.columns || 110) * 0.36));
-    const listStartY = 8; // body start
+    const listStartY = 10; // body start
 
     if (event.x >= listStartX && event.x <= listStartX + listWidth && event.y > listStartY) {
       const clickedRowOffset = event.y - (listStartY + 1);
       const total = this.engine.getFilteredCount();
       if (clickedRowOffset >= 0 && clickedRowOffset < total) {
         this.engine.setSelectedIndex(clickedRowOffset);
+        this.engine.render();
         return;
       }
     }

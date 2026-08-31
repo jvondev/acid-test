@@ -39,13 +39,16 @@ export function drawHeader(buffer: ScreenBuffer, startX: number, startY: number,
   for (let y = 0; y < 6; y++) {
     const currentY = startY + y;
 
-    // 1. Ambient Caustics Droplet
+    // 1. Dynamic Animated Gradient Droplet (Smooth Liquid Caustics Wave across Brand Hue)
     const dropRaw = DROPLET_ROWS[y];
     Array.from(dropRaw).forEach((char, col) => {
       if (char !== ' ') {
-        const caustic = Math.sin(timeVal * 3.0 + y * 1.5 + col * 0.8) * 0.08;
-        const t = Math.max(0, Math.min(1, (col / 9) * 0.25 + caustic));
-        buffer.setCell(startX + col, currentY, char, { fg: getGradientAnsi(t) });
+        const wave = (Math.sin(timeVal * 2.8 + y * 0.7 - col * 0.4) + 1) / 2;
+        const t = Math.max(0.1, Math.min(1.0, 0.15 + wave * 0.75));
+        buffer.setCell(startX + col, currentY, char, {
+          fg: getGradientAnsi(t),
+          bold: y >= 1 && y <= 4,
+        });
       }
     });
 

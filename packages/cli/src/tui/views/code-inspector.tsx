@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Box, Text } from 'ink';
 import type { InvariantResult } from '@acid-test/core';
 import { THEME, safeTruncate } from '../theme.js';
@@ -26,14 +26,15 @@ export const CodeInspector: React.FC<InspectorProps> = ({ selectedResult, width 
   const isFailed = selectedResult.status === 'FAIL';
   const diff = getCodeDiffForInvariant(selectedResult);
 
-  // 1. VIEW FOR VERIFIED / PASSING INVARIANTS (Cognitive Relief Mode)
+  // 1. VIEW FOR VERIFIED / PASSING INVARIANTS
   if (!isFailed) {
     return (
       <Box flexDirection="column" width={width} paddingLeft={1}>
-        {/* Header Tab */}
         <Box justifyContent="space-between" width={contentWidth} flexWrap="nowrap">
           <Box gap={1} flexWrap="nowrap">
-            <Text color="green" bold>✔ [{selectedResult.testId}] {safeTruncate(selectedResult.title || selectedResult.testName, contentWidth - 25)}</Text>
+            <Text color="green" bold>
+              ✔ [{selectedResult.testId}] {safeTruncate(selectedResult.title || selectedResult.testName, contentWidth - 25)}
+            </Text>
           </Box>
           <Box gap={1} flexWrap="nowrap">
             <Text color="green" bold>[VERIFIED]</Text>
@@ -41,7 +42,6 @@ export const CodeInspector: React.FC<InspectorProps> = ({ selectedResult, width 
           </Box>
         </Box>
 
-        {/* Human Invariant Explanation */}
         <Box marginTop={1} flexDirection="column" width={contentWidth}>
           <Text bold color="white">
             INVARIANT VERIFIED UNDER ADVERSARIAL BURST
@@ -51,29 +51,23 @@ export const CodeInspector: React.FC<InspectorProps> = ({ selectedResult, width 
           </Text>
         </Box>
 
-        {/* Clean Concurrency Proof Metrics */}
         <Box flexDirection="column" marginTop={1} width={contentWidth}>
-          <Text color="gray">
-            {THEME.symbols.rule.repeat(Math.max(10, contentWidth))}
-          </Text>
+          <Text color="gray">{THEME.symbols.rule.repeat(Math.max(10, contentWidth))}</Text>
           <Box justifyContent="space-between" flexWrap="nowrap">
-            <Text color="gray">Adversarial Concurrency:</Text>
+            <Text color="gray">Concurrency Profile:</Text>
             <Text color="green" bold>10 Parallel Workers • 0 Race Conditions</Text>
           </Box>
           <Box justifyContent="space-between" flexWrap="nowrap">
-            <Text color="gray">Jitter Resistance Window:</Text>
-            <Text color="green" bold>5ms Microsecond Jitter Handled</Text>
+            <Text color="gray">Microsecond Jitter:</Text>
+            <Text color="green" bold>5ms Window Handled</Text>
           </Box>
           <Box justifyContent="space-between" flexWrap="nowrap">
-            <Text color="gray">Financial Exposure:</Text>
-            <Text color="green" bold>$0.00 / month (Clean Ledger)</Text>
+            <Text color="gray">State Integrity:</Text>
+            <Text color="green" bold>Verified Atomic & Isolated</Text>
           </Box>
-          <Text color="gray">
-            {THEME.symbols.rule.repeat(Math.max(10, contentWidth))}
-          </Text>
+          <Text color="gray">{THEME.symbols.rule.repeat(Math.max(10, contentWidth))}</Text>
         </Box>
 
-        {/* Minimal Action Bar */}
         <Box marginTop={1} gap={2} flexWrap="nowrap">
           <Text color="black" backgroundColor="green" bold>
             {` [R] RE-TEST INVARIANT `}
@@ -86,12 +80,11 @@ export const CodeInspector: React.FC<InspectorProps> = ({ selectedResult, width 
     );
   }
 
-  // 2. VIEW FOR FAILURES (Diagnostic Remediation Mode with Code Diff)
+  // 2. VIEW FOR FAILURES (Diagnostic Remediation Mode)
   const severityColor = selectedResult.severity === 'CRITICAL' ? 'red' : selectedResult.severity === 'HIGH' ? 'yellow' : 'cyan';
 
   return (
     <Box flexDirection="column" width={width} paddingLeft={1}>
-      {/* Active File Tab Header */}
       <Box justifyContent="space-between" width={contentWidth} flexWrap="nowrap">
         <Box gap={1} flexWrap="nowrap">
           <Text color="cyan" bold>FILE: {diff.file}:{selectedResult.lineNumber || diff.startLine}</Text>
@@ -102,7 +95,6 @@ export const CodeInspector: React.FC<InspectorProps> = ({ selectedResult, width 
         </Box>
       </Box>
 
-      {/* Problem Summary */}
       <Box marginTop={0} width={contentWidth} flexDirection="column">
         <Text color="white" bold>
           {selectedResult.title || selectedResult.testName}
@@ -112,15 +104,9 @@ export const CodeInspector: React.FC<InspectorProps> = ({ selectedResult, width 
         </Text>
       </Box>
 
-      {/* Dynamic Code Diff Editor with Real Line Numbers */}
-      <Box
-        flexDirection="column"
-        marginTop={0}
-        width={contentWidth}
-      >
-        <Text color="gray">
-          {THEME.symbols.rule.repeat(Math.max(10, contentWidth))}
-        </Text>
+      {/* Code Diff Editor */}
+      <Box flexDirection="column" marginTop={0} width={contentWidth}>
+        <Text color="gray">{THEME.symbols.rule.repeat(Math.max(10, contentWidth))}</Text>
 
         <Box flexDirection="column" paddingLeft={1}>
           {diff.lines.map((l, idx) => {
@@ -139,12 +125,9 @@ export const CodeInspector: React.FC<InspectorProps> = ({ selectedResult, width 
           })}
         </Box>
 
-        <Text color="gray">
-          {THEME.symbols.rule.repeat(Math.max(10, contentWidth))}
-        </Text>
+        <Text color="gray">{THEME.symbols.rule.repeat(Math.max(10, contentWidth))}</Text>
       </Box>
 
-      {/* Remediation Note */}
       {selectedResult.suggestedFix && (
         <Box marginTop={0} width={contentWidth}>
           <Text color="green" bold>Remediation: </Text>
@@ -152,10 +135,9 @@ export const CodeInspector: React.FC<InspectorProps> = ({ selectedResult, width 
         </Box>
       )}
 
-      {/* Action shortcuts ribbon */}
       <Box marginTop={1} gap={2} flexWrap="nowrap">
         <Text color="black" backgroundColor="green" bold>
-          {` [F] APPLY AI FIX `}
+          {` [F] APPLY CODE FIX `}
         </Text>
         <Text color="black" backgroundColor="cyan" bold>
           {` [R] REPLAY BURST `}

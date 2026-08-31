@@ -1,5 +1,5 @@
-﻿import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Box, useInput, useApp } from 'ink';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { Box, useInput, useApp, Text } from 'ink';
 import type { InvariantResult, HealthGrade } from '@acid-test/core';
 import { TestRunner, ProjectDetector, FinancialRiskCalculator, SandboxServer } from '@acid-test/core';
 
@@ -19,6 +19,7 @@ import { exportPromptToFile } from './export-prompt.js';
 import { exportHtmlAuditReport } from './export-html.js';
 import { getAllDomainSuites } from './suite-factory.js';
 import { MouseTracker } from './mouse-tracker.js';
+import { getGradientAnsi, BRAND_COLORS } from './theme.js';
 
 interface TuiAppProps {
   initialUrl?: string;
@@ -42,7 +43,7 @@ const TAB_LIST: TuiTab[] = ['overview', 'billing', 'db', 'auth', 'queue', 'webho
 export const TuiApp: React.FC<TuiAppProps> = ({ initialUrl, autoRun = true }) => {
   const { exit } = useApp();
 
-  // Dynamic Terminal Dimensions with Active Resize Listener to Prevent Freezing
+  // Dynamic Terminal Dimensions
   const [dimensions, setDimensions] = useState({
     columns: process.stdout.columns || 105,
     rows: process.stdout.rows || 30,
@@ -62,6 +63,15 @@ export const TuiApp: React.FC<TuiAppProps> = ({ initialUrl, autoRun = true }) =>
   }, []);
 
   const columns = Math.max(60, dimensions.columns);
+
+  // 30 FPS Ambient Fluid Caustics Time Clock
+  const [timeVal, setTimeVal] = useState(0);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeVal((t) => t + 0.05);
+    }, 33);
+    return () => clearInterval(timer);
+  }, []);
 
   const [currentTab, setCurrentTab] = useState<TuiTab>('overview');
   const [activeModal, setActiveModal] = useState<ActiveModal>('none');
@@ -91,7 +101,7 @@ export const TuiApp: React.FC<TuiAppProps> = ({ initialUrl, autoRun = true }) =>
 
   const runAllSuites = useCallback(async () => {
     setIsRunning(true);
-    setStatusMessage('Probing local ports & running live concurrency bursts...');
+    setStatusMessage('Injecting 8-domain concurrency torrent...');
 
     let activeUrl = targetUrl;
 
@@ -145,7 +155,7 @@ export const TuiApp: React.FC<TuiAppProps> = ({ initialUrl, autoRun = true }) =>
     setActiveTestName(undefined);
 
     const passed = accumulated.filter((r) => r.status === 'PASS').length;
-    setStatusMessage(`Live audit complete: ${passed}/${accumulated.length} passed.`);
+    setStatusMessage(`Audit complete: ${passed}/${accumulated.length} invariants verified.`);
   }, [targetUrl, chaosConfig]);
 
   useEffect(() => {
@@ -175,7 +185,7 @@ export const TuiApp: React.FC<TuiAppProps> = ({ initialUrl, autoRun = true }) =>
     return tabMatch && statusMatch && sevMatch;
   });
 
-  // Failures First Grouping
+  // Failures First
   const failures = rawFiltered.filter((r) => r.status === 'FAIL');
   const passes = rawFiltered.filter((r) => r.status !== 'FAIL');
   const filteredResults = [...failures, ...passes];
@@ -195,7 +205,6 @@ export const TuiApp: React.FC<TuiAppProps> = ({ initialUrl, autoRun = true }) =>
 
   // Keyboard & Mouse interaction handler
   useInput((input, key) => {
-    // 1. Mouse Click & Scroll Handling (SGR 1006)
     const mouse = MouseTracker.parseMouseEvent(input);
     if (mouse) {
       if (mouse.button === 'scrollUp') {
@@ -207,7 +216,6 @@ export const TuiApp: React.FC<TuiAppProps> = ({ initialUrl, autoRun = true }) =>
         return;
       }
       if (mouse.button === 'left') {
-        // Click on Tab bar (Row 2)
         if (mouse.y === 2 || mouse.y === 3) {
           const tabIndex = Math.min(TAB_LIST.length - 1, Math.floor(mouse.x / 11));
           if (TAB_LIST[tabIndex]) {
@@ -216,7 +224,6 @@ export const TuiApp: React.FC<TuiAppProps> = ({ initialUrl, autoRun = true }) =>
             return;
           }
         }
-        // Click on Invariant item on Left Explorer (Rows 5 to 19)
         const leftWidth = Math.max(26, Math.floor(columns * 0.35));
         if (mouse.x <= leftWidth && mouse.y >= 5 && mouse.y <= 19) {
           const clickedIndex = mouse.y - 5;
@@ -225,7 +232,6 @@ export const TuiApp: React.FC<TuiAppProps> = ({ initialUrl, autoRun = true }) =>
             return;
           }
         }
-        // Click on Action buttons on Right Pane (Rows 16+)
         if (mouse.x > leftWidth && mouse.y >= 16) {
           handleAutoFix();
           return;
@@ -244,7 +250,6 @@ export const TuiApp: React.FC<TuiAppProps> = ({ initialUrl, autoRun = true }) =>
       return;
     }
 
-    // Modal active handling
     if (activeModal !== 'none') {
       if (activeModal === 'chaos') {
         if (input === '1') setChaosConfig((c) => ({ ...c, concurrency: 10 }));
@@ -271,14 +276,12 @@ export const TuiApp: React.FC<TuiAppProps> = ({ initialUrl, autoRun = true }) =>
       return;
     }
 
-    // Tab switching (1-9)
     if (TAB_MAP[input]) {
       setCurrentTab(TAB_MAP[input]);
       setSelectedIndex(0);
       return;
     }
 
-    // Move left list cursor ➔ Live right code inspector updates instantly
     if (key.upArrow || input === 'k') {
       setSelectedIndex((p) => Math.max(0, p - 1));
       return;
@@ -294,7 +297,7 @@ export const TuiApp: React.FC<TuiAppProps> = ({ initialUrl, autoRun = true }) =>
     }
 
     if (input === 'r' || input === 'R') {
-      showToast(`Replaying burst on [${selectedResult?.testId}]...`);
+      showToast(`Replaying concurrency burst on [${selectedResult?.testId}]...`);
       return;
     }
 
@@ -344,6 +347,7 @@ export const TuiApp: React.FC<TuiAppProps> = ({ initialUrl, autoRun = true }) =>
         totalRiskUsd={totalRiskUsd}
         counts={counts}
         columns={columns}
+        timeVal={timeVal}
       />
 
       <ToastBanner message={toastMessage} columns={columns} />
@@ -364,8 +368,28 @@ export const TuiApp: React.FC<TuiAppProps> = ({ initialUrl, autoRun = true }) =>
           results={allResults}
           columns={columns}
         />
+      ) : isRunning ? (
+        /* Live Concurrency Torrent View while tests run */
+        <Box flexDirection="column" width={columns} paddingY={1} paddingX={1}>
+          <Text bold color="green">
+            ⚡ INJECTING 8-DOMAIN ADVERSARIAL CONCURRENCY TORRENT...
+          </Text>
+          <Text color="gray">
+            Auditing {activeTestName || 'distributed endpoints'} under 5ms microsecond jitter...
+          </Text>
+          <Box marginTop={1}>
+            <Text color="green">
+              {Array.from({ length: Math.min(columns - 4, 60) })
+                .map((_, i) => {
+                  const t = (i / 60) + Math.sin(timeVal * 4 + i) * 0.1;
+                  return `${getGradientAnsi(t)}█\x1b[0m`;
+                })
+                .join('')}
+            </Text>
+          </Box>
+        </Box>
       ) : (
-        /* Permanent Split-Screen IDE Layout with Dynamic Proportions */
+        /* Permanent Split-Screen IDE Layout */
         <Box flexDirection="row" width={columns} marginTop={0}>
           <InvariantsExplorer
             results={filteredResults}
@@ -374,10 +398,7 @@ export const TuiApp: React.FC<TuiAppProps> = ({ initialUrl, autoRun = true }) =>
             activeTestName={activeTestName}
             width={leftWidth}
           />
-          <CodeInspector
-            selectedResult={selectedResult}
-            width={rightWidth}
-          />
+          <CodeInspector selectedResult={selectedResult} width={rightWidth} />
         </Box>
       )}
 

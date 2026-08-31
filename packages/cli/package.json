@@ -38,6 +38,8 @@
     "@acid-test/studio": "workspace:*",
     "@acid-test/webhook": "workspace:*",
     "@clack/prompts": "^1.7.0",
+    "@opentui/core": "^0.5.9",
+    "@opentui/react": "^0.5.9",
     "asciichart": "^1.5.25",
     "commander": "^13.1.0",
     "ink": "^7.1.1",

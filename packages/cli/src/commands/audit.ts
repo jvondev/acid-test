@@ -1,4 +1,4 @@
-﻿import pc from 'picocolors';
+import pc from 'picocolors';
 import { TestRunner, TerminalReporter, ProjectDetector, type AuditReport, type DetectedDomain } from '@acid-test/core';
 import { createBillingSuite } from '@acid-test/billing';
 import { createDbSuite } from '@acid-test/db';
@@ -9,6 +9,7 @@ import { createAiSuite } from '@acid-test/ai';
 import { createEmailSuite } from '@acid-test/email';
 import { createStorageSuite } from '@acid-test/storage';
 import { runDemoCommand } from './demo.js';
+import { renderBrandBanner } from '../brand/index.js';
 
 export interface AuditOptions {
   url?: string;
@@ -28,10 +29,18 @@ export async function runAudit(modules: string[], options: AuditOptions): Promis
     return runDemoCommand();
   }
 
-  console.log(pc.bold(pc.cyan(`\n⚡ Acidtest Autonomous Discovery & Adversarial Audit Engine\n`)));
-
   // 1. Run zero-config project discovery
   const discovery = await ProjectDetector.discover(process.cwd());
+
+  // Print Unified Brand Banner with Target Info
+  const resolvedTarget = options.url || discovery.liveServer?.url || 'http://localhost:3000';
+  const resolvedLatency = discovery.liveServer?.latencyMs || 1.2;
+
+  console.log(renderBrandBanner({
+    targetUrl: resolvedTarget,
+    latencyMs: resolvedLatency,
+    invariantsCount: 24,
+  }));
 
   console.log(pc.bold(`📦 Project Topology & Detected Services:`));
   console.log(`  ${pc.dim('•')} Location:  ${pc.white(discovery.projectRoot)}`);
@@ -56,7 +65,7 @@ export async function runAudit(modules: string[], options: AuditOptions): Promis
       console.log(`  ${pc.dim('•')} Live Target: ${pc.green(targetUrl)} ${pc.dim(`(Active dev server probed on port ${discovery.liveServer.port})`)}`);
     } else {
       targetUrl = discovery.envVars['APP_URL'] || discovery.envVars['NEXT_PUBLIC_APP_URL'] || 'http://localhost:3000';
-      console.log(`  ${pc.dim('•')} Target Server: ${pc.yellow(targetUrl)} ${pc.dim(`(No active server detected on localhost ports. Ensure 'pnpm dev' is running for live network fuzzing)`)}`);
+      console.log(`  ${pc.dim('•')} Target Server: ${pc.yellow(targetUrl)} ${pc.dim(`(No active server detected on localhost ports. Ensure dev server is running)`)}`);
     }
   } else {
     console.log(`  ${pc.dim('•')} Target Server: ${pc.cyan(targetUrl)}`);

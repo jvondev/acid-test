@@ -1,5 +1,7 @@
 // Emil-grade typography, formatting, and layout tokens for Acidtest TUI
-// Engineered for zero cognitive overload, high contrast, and dark/light terminal compatibility
+// Engineered for zero cognitive overload, high contrast, and dark terminal aesthetic
+
+export * from '../brand/index.js';
 
 export const THEME = {
   symbols: {
@@ -16,6 +18,10 @@ export const THEME = {
     vertical: '│',
     plus: '+',
     minus: '-',
+    cornerTL: '╭',
+    cornerTR: '╮',
+    cornerBL: '╰',
+    cornerBR: '╯',
   },
 } as const;
 

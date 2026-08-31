@@ -1,7 +1,8 @@
 import React from 'react';
 import { Box, Text } from 'ink';
 import type { TuiTab, HealthGrade } from '../types.js';
-import { safeTruncate, formatMoney, getHealthColor, THEME } from '../theme.js';
+import { safeTruncate, THEME, DROPLET_ROWS, WORDMARK_ROWS, BRAND_TAGLINE, getGradientAnsi } from '../theme.js';
+import { Tabs } from '../widgets/tabs.js';
 
 interface HeaderProps {
   currentTab: TuiTab;
@@ -13,6 +14,7 @@ interface HeaderProps {
   totalRiskUsd: number;
   counts: Record<TuiTab, number>;
   columns: number;
+  timeVal?: number;
 }
 
 const TABS: { id: TuiTab; label: string; num: string }[] = [
@@ -32,71 +34,119 @@ export const HeaderRibbon: React.FC<HeaderProps> = ({
   targetUrl,
   targetLatencyMs,
   isSandbox,
-  healthScore,
-  healthGrade,
-  totalRiskUsd,
   counts,
   columns,
+  timeVal = 0,
 }) => {
-  const healthColor = getHealthColor(healthScore);
-  const targetDisplay = safeTruncate(targetUrl, 26);
+  const isCompact = columns < 90;
+  const targetDisplay = safeTruncate(targetUrl, 28);
 
-  return (
-    <Box flexDirection="column" width={columns}>
-      {/* Row 1: Quiet Telemetry Ribbon */}
-      <Box justifyContent="space-between" width={columns} flexWrap="nowrap">
-        <Box gap={1} flexWrap="nowrap">
-          <Text bold color="cyan">
-            ACIDTEST
-          </Text>
-          <Text color="gray">{THEME.symbols.divider}</Text>
-          <Text color="white">
-            {targetDisplay}{' '}
-            {isSandbox ? (
-              <Text color="yellow">(Sandbox Target)</Text>
-            ) : targetLatencyMs > 0 ? (
-              <Text color="green">({targetLatencyMs}ms live)</Text>
-            ) : (
-              <Text color="gray">(probed)</Text>
-            )}
+  const tabItems = TABS.map((t) => ({
+    ...t,
+    count: counts[t.id] || 0,
+  }));
+
+  if (isCompact) {
+    return (
+      <Box flexDirection="column" width={columns}>
+        <Box justifyContent="space-between" width={columns} flexWrap="nowrap">
+          <Box gap={1} flexWrap="nowrap">
+            <Text bold color="green">
+              ◆ acidtest
+            </Text>
+            <Text color="gray">{THEME.symbols.divider}</Text>
+            <Text color="white">{targetDisplay}</Text>
+          </Box>
+          <Text color="green" bold>
+            {targetLatencyMs > 0 ? `${targetLatencyMs}ms` : 'live'}
           </Text>
         </Box>
-
-        <Box gap={1} flexWrap="nowrap">
-          <Text color="gray">Health: </Text>
-          <Text bold color={healthColor}>
-            {healthGrade} ({healthScore}/100)
-          </Text>
-          <Text color="gray">{THEME.symbols.divider}</Text>
-          <Text color="gray">Risk: </Text>
-          <Text bold color={totalRiskUsd > 0 ? 'red' : 'green'}>
-            {formatMoney(totalRiskUsd)}/mo
-          </Text>
+        <Box marginTop={0} width={columns}>
+          <Tabs items={tabItems} activeId={currentTab} columns={columns} />
+        </Box>
+        <Box width={columns}>
+          <Text color="gray">{THEME.symbols.rule.repeat(Math.max(10, columns))}</Text>
         </Box>
       </Box>
+    );
+  }
 
-      {/* Row 2: Clean Compact Domain Filter Bar */}
-      <Box marginTop={0} width={columns} flexWrap="nowrap">
-        {TABS.map((tab, idx) => {
-          const isActive = tab.id === currentTab;
-          const count = counts[tab.id] || 0;
-          return (
-            <React.Fragment key={tab.id}>
-              {idx > 0 && <Text color="gray"> </Text>}
-              <Text
-                color={isActive ? 'black' : 'gray'}
-                backgroundColor={isActive ? 'cyan' : undefined}
-                bold={isActive}
-              >
-                {` [${tab.num}] ${tab.label}: ${count} `}
+  // Full Hero Header with Animated Caustics Droplet + Wordmark + Tagline
+  return (
+    <Box flexDirection="column" width={columns} marginBottom={0}>
+      {/* 6-Row Unified Solid Droplet + Wordmark + Tagline */}
+      <Box flexDirection="column" width={columns}>
+        {DROPLET_ROWS.map((dropRaw, y) => {
+          // Left Droplet Column
+          const coloredDrop = Array.from(dropRaw).map((c, col) => {
+            if (c === ' ') return ' ';
+            const caustic = Math.sin(timeVal * 3.0 + y * 1.5 + col * 0.8) * 0.08;
+            const t = Math.max(0, Math.min(1, (col / 9) * 0.25 + caustic));
+            return `${getGradientAnsi(t)}${c}\x1b[0m`;
+          }).join('');
+
+          // Right Side Information
+          let rightSide: React.ReactNode = null;
+          if (y === 0) {
+            const wmRaw = WORDMARK_ROWS[0];
+            const coloredWordmark = Array.from(wmRaw).map((c, col) => {
+              if (c === ' ') return ' ';
+              const t = 0.3 + (col / wmRaw.length) * 0.7;
+              return `${getGradientAnsi(t)}${c}\x1b[0m`;
+            }).join('');
+            rightSide = (
+              <Box gap={1} flexWrap="nowrap">
+                <Text>{coloredWordmark}</Text>
+                <Text color="gray">v1.0.0</Text>
+              </Box>
+            );
+          } else if (y === 1) {
+            const wmRaw = WORDMARK_ROWS[1];
+            const coloredWordmark = Array.from(wmRaw).map((c, col) => {
+              if (c === ' ') return ' ';
+              const t = 0.3 + (col / wmRaw.length) * 0.7;
+              return `${getGradientAnsi(t)}${c}\x1b[0m`;
+            }).join('');
+            rightSide = (
+              <Box gap={1} flexWrap="nowrap">
+                <Text>{coloredWordmark}</Text>
+                <Text color="green">
+                  {targetDisplay} {isSandbox ? '(sandbox)' : `(${targetLatencyMs}ms)`}
+                </Text>
+              </Box>
+            );
+          } else if (y === 2) {
+            rightSide = <Text color="gray">{THEME.symbols.rule.repeat(Math.max(10, columns - 16))}</Text>;
+          } else if (y === 3) {
+            rightSide = (
+              <Text bold color="white">
+                {BRAND_TAGLINE}
               </Text>
-            </React.Fragment>
+            );
+          } else if (y === 4) {
+            rightSide = (
+              <Text color="gray">
+                24 distributed invariants audited • <Text color="green">● Active Concurrency Engine</Text>
+              </Text>
+            );
+          }
+
+          return (
+            <Box key={y} flexDirection="row" width={columns} flexWrap="nowrap">
+              <Text>{coloredDrop}  </Text>
+              {rightSide}
+            </Box>
           );
         })}
       </Box>
 
-      {/* Horizontal Divider Rule */}
-      <Box width={columns}>
+      {/* Domain Navigation Tabs */}
+      <Box marginTop={1} width={columns}>
+        <Tabs items={tabItems} activeId={currentTab} columns={columns} />
+      </Box>
+
+      {/* Horizontal Divider */}
+      <Box width={columns} marginTop={0}>
         <Text color="gray">{THEME.symbols.rule.repeat(Math.max(10, columns))}</Text>
       </Box>
     </Box>

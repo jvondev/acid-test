@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Box, Text } from 'ink';
 import type { InvariantResult } from '@acid-test/core';
 import { THEME, safeTruncate } from '../theme.js';
@@ -23,12 +23,11 @@ export const InvariantsExplorer: React.FC<ExplorerProps> = ({
   const contentWidth = Math.max(15, width - 2);
   const titleWidth = Math.max(6, contentWidth - 22);
 
-  // Group into Failures First, then Passing
+  // Failures First
   const failures = results.filter((r) => r.status === 'FAIL');
   const passes = results.filter((r) => r.status !== 'FAIL');
   const groupedResults = [...failures, ...passes];
 
-  // Compute scroll window
   let startIdx = 0;
   if (total > maxVisible) {
     startIdx = Math.max(0, Math.min(selectedIndex - 5, total - maxVisible));
@@ -38,7 +37,7 @@ export const InvariantsExplorer: React.FC<ExplorerProps> = ({
   return (
     <Box flexDirection="column" width={width} paddingRight={1}>
       {/* Explorer Header */}
-      <Box justifyContent="space-between" width={contentWidth} flexWrap="nowrap">
+      <Box justifyContent="space-between" width={contentWidth} flexWrap="nowrap" marginBottom={0}>
         <Text bold color="white">
           INVARIANTS EXPLORER
         </Text>
@@ -58,7 +57,7 @@ export const InvariantsExplorer: React.FC<ExplorerProps> = ({
       {total === 0 ? (
         <Box paddingY={1}>
           <Text color="gray">
-            {isRunning ? `Running ${safeTruncate(activeTestName, titleWidth)}...` : 'No invariants loaded.'}
+            {isRunning ? `Auditing ${safeTruncate(activeTestName, titleWidth)}...` : 'No invariants loaded.'}
           </Text>
         </Box>
       ) : (
@@ -74,26 +73,23 @@ export const InvariantsExplorer: React.FC<ExplorerProps> = ({
             const shortId = r.testId.replace(/^ACID-/, '').padEnd(8, ' ').slice(0, 8);
             const truncatedTitle = safeTruncate(r.title || r.testName, titleWidth).padEnd(titleWidth, ' ');
 
-            // Section divider if transitioning between failures and passes
             const isFirstPass = isPass && relIdx > 0 && visibleResults[relIdx - 1]?.status === 'FAIL';
 
             return (
               <React.Fragment key={r.testId}>
                 {isFirstPass && (
                   <Box width={contentWidth} marginTop={0} marginBottom={0}>
-                    <Text color="gray">
-                      {THEME.symbols.rule.repeat(Math.max(4, contentWidth))}
-                    </Text>
+                    <Text color="gray">{THEME.symbols.rule.repeat(Math.max(4, contentWidth))}</Text>
                   </Box>
                 )}
                 <Box
                   justifyContent="space-between"
                   width={contentWidth}
-                  backgroundColor={isSelected ? 'cyan' : undefined}
+                  backgroundColor={isSelected ? 'green' : undefined}
                   flexWrap="nowrap"
                 >
                   <Box gap={1} flexWrap="nowrap">
-                    <Text color={isSelected ? 'black' : isFail ? 'red' : 'cyan'} bold={isSelected || isFail}>
+                    <Text color={isSelected ? 'black' : isFail ? 'red' : 'green'} bold={isSelected || isFail}>
                       {isSelected ? THEME.symbols.pointer : ' '} {shortId}
                     </Text>
                     <Text color={isSelected ? 'black' : isFail ? 'white' : 'gray'} bold={isSelected || isFail}>

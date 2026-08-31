@@ -13,7 +13,7 @@ export const ChaosLabView: React.FC<ChaosLabProps> = ({ config, isRunning, colum
     <Box flexDirection="column" width={columns} paddingX={1}>
       <Box marginTop={1} justifyContent="space-between" width={columns - 2} flexWrap="nowrap">
         <Text bold color="yellow">
-          ADVERSARIAL CHAOS PROVING GROUND & FUZZING LAB
+          ADVERSARIAL CONCURRENCY & JITTER CONTROLS
         </Text>
         <Text color="gray">Press [C] or [Esc] to return</Text>
       </Box>
@@ -21,7 +21,7 @@ export const ChaosLabView: React.FC<ChaosLabProps> = ({ config, isRunning, colum
       <Box flexDirection="column" marginTop={1} width={columns - 2}>
         {/* Concurrency setting */}
         <Box justifyContent="space-between" flexWrap="nowrap">
-          <Text color="cyan" bold>Worker Concurrency (N):</Text>
+          <Text color="green" bold>Worker Concurrency (N):</Text>
           <Box gap={1} flexWrap="nowrap">
             {[10, 25, 50, 100].map((val) => {
               const active = config.concurrency === val;
@@ -41,7 +41,7 @@ export const ChaosLabView: React.FC<ChaosLabProps> = ({ config, isRunning, colum
 
         {/* Jitter setting */}
         <Box justifyContent="space-between" marginTop={1} flexWrap="nowrap">
-          <Text color="cyan" bold>Microsecond Jitter Window:</Text>
+          <Text color="green" bold>Microsecond Jitter Window:</Text>
           <Box gap={1} flexWrap="nowrap">
             {[0, 5, 25, 100].map((val) => {
               const active = config.jitterMs === val;
@@ -65,7 +65,7 @@ export const ChaosLabView: React.FC<ChaosLabProps> = ({ config, isRunning, colum
           Press <Text color="yellow" bold>[1-4]</Text> Concurrency | <Text color="yellow" bold>[5-8]</Text> Jitter
         </Text>
         <Text color={isRunning ? 'yellow' : 'green'} bold>
-          {isRunning ? '⚡ INJECTING CHAOS BURST...' : 'Press [Space] to Dispatch Burst'}
+          {isRunning ? '⚡ INJECTING CONCURRENCY BURST...' : 'Press [Space] to Dispatch Burst'}
         </Text>
       </Box>
     </Box>

@@ -10,3 +10,4 @@ export * from './commands/storage.js';
 export * from './commands/demo.js';
 export * from './commands/studio.js';
 export * from './commands/init.js';
+export * from './tui/index.js';

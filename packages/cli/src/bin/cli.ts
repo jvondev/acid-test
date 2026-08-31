@@ -4,6 +4,7 @@ import { runAudit } from '../commands/audit.js';
 import { runDemoCommand } from '../commands/demo.js';
 import { runStudioCommand } from '../commands/studio.js';
 import { runInitCommand } from '../commands/init.js';
+import { runInteractiveTui } from '../tui/index.js';
 import { registerDomainCommands } from './domain-commands.js';
 
 const program = new Command();
@@ -20,6 +21,7 @@ program
   .option('-j, --jitter <ms>', 'Microsecond/millisecond jitter window in ms', '5')
   .option('--gmv <usd>', 'Monthly GMV transaction volume for financial risk modeling')
   .option('--ticket-size <usd>', 'Average ticket order value in USD')
+  .option('--tui', 'Launch interactive full-screen React Terminal UI')
   .option('--ci', 'Enforce strict CI exit code (exit code 1 on invariant failures)')
   .option('--studio', 'Launch local visual Studio on port 4400 after execution');
 
@@ -29,6 +31,11 @@ program
   .description('Audit all or specified domain modules against ACID invariants')
   .action(async (modules: string[], options: any) => {
     const opts = { ...program.opts(), ...options };
+    if (opts.tui) {
+      await runInteractiveTui({ url: opts.url });
+      return;
+    }
+
     const exitCode = await runAudit(modules || [], opts);
     if (opts.studio) {
       await runStudioCommand({ port: opts.studioPort || '4400' });
@@ -38,10 +45,20 @@ program
     }
   });
 
-// 2. Register domain commands & platform aliases
+// 2. Interactive TUI Command
+program
+  .command('tui')
+  .alias('interactive')
+  .description('Launch interactive full-screen React Terminal UI with ASCII latency charts')
+  .action(async (options: any) => {
+    const opts = { ...program.opts(), ...options };
+    await runInteractiveTui({ url: opts.url });
+  });
+
+// 3. Register domain commands & platform aliases
 registerDomainCommands(program);
 
-// 3. Demo / Fuzz command
+// 4. Demo / Fuzz command
 program
   .command('demo')
   .alias('fuzz')
@@ -50,7 +67,7 @@ program
     await runDemoCommand();
   });
 
-// 4. Studio UI
+// 5. Studio UI
 program
   .command('studio')
   .alias('ui')
@@ -61,7 +78,7 @@ program
     await runStudioCommand({ port: opts.port || '4400' });
   });
 
-// 5. Init / Config Scaffold
+// 6. Init / Config Scaffold
 program
   .command('init')
   .alias('setup')

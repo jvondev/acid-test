@@ -6,15 +6,15 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "bin": {
-    "acidtest": "./dist/bin/cli.js",
-    "agy-acid": "./dist/bin/cli.js"
+    "acidtest": "./dist/bin/cli.mjs",
+    "agy-acid": "./dist/bin/cli.mjs"
   },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.js",
-      "default": "./dist/index.js"
+      "default": "./dist/index.mjs"
     }
   },
   "scripts": {
@@ -22,28 +22,35 @@
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "start": "node ./dist/bin/cli.js",
+    "start": "node ./dist/bin/cli.mjs",
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@acidtest/core": "workspace:*",
-    "@acidtest/billing": "workspace:*",
-    "@acidtest/db": "workspace:*",
-    "@acidtest/auth": "workspace:*",
-    "@acidtest/queue": "workspace:*",
-    "@acidtest/webhook": "workspace:*",
     "@acidtest/ai": "workspace:*",
+    "@acidtest/auth": "workspace:*",
+    "@acidtest/billing": "workspace:*",
+    "@acidtest/core": "workspace:*",
+    "@acidtest/db": "workspace:*",
     "@acidtest/email": "workspace:*",
+    "@acidtest/queue": "workspace:*",
     "@acidtest/storage": "workspace:*",
     "@acidtest/studio": "workspace:*",
+    "@acidtest/webhook": "workspace:*",
+    "@clack/prompts": "^1.7.0",
+    "asciichart": "^1.5.25",
     "commander": "^13.1.0",
-    "picocolors": "^1.1.1"
+    "ink": "^7.1.1",
+    "ink-spinner": "^5.0.0",
+    "picocolors": "^1.1.1",
+    "react": "^19.2.8"
   },
   "devDependencies": {
+    "@types/asciichart": "^1.5.8",
     "@types/node": "^22.13.9",
+    "@types/react": "^19.2.18",
+    "rimraf": "^6.0.1",
     "tsup": "^8.4.0",
     "typescript": "^5.8.2",
-    "vitest": "^3.0.7",
-    "rimraf": "^6.0.1"
+    "vitest": "^3.0.7"
   }
 }

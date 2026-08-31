@@ -8,6 +8,7 @@ import { createWebhookSuite } from '@acidtest/webhook';
 import { createAiSuite } from '@acidtest/ai';
 import { createEmailSuite } from '@acidtest/email';
 import { createStorageSuite } from '@acidtest/storage';
+import { runDemoCommand } from './demo.js';
 
 export interface AuditOptions {
   url?: string;
@@ -22,6 +23,11 @@ export interface AuditOptions {
 }
 
 export async function runAudit(modules: string[], options: AuditOptions): Promise<number> {
+  // Fuzzy alias routing: if user ran `acidtest audit demo`, execute demo proving ground
+  if (modules.includes('demo') || modules.includes('fuzz')) {
+    return runDemoCommand();
+  }
+
   console.log(pc.bold(pc.cyan(`\n⚡ Acidtest Autonomous Discovery & Adversarial Audit Engine\n`)));
 
   // 1. Run zero-config project discovery
@@ -81,15 +87,19 @@ export async function runAudit(modules: string[], options: AuditOptions): Promis
 
   let suitesToRun: typeof allSuites = [];
   if (modules.length > 0) {
-    // User explicitly requested specific modules (e.g. `acidtest audit billing db`)
-    suitesToRun = allSuites.filter(s => modules.includes(s.domain));
+    const validDomains = allSuites.map(s => s.domain);
+    const matched = allSuites.filter(s => modules.includes(s.domain));
+    if (matched.length === 0) {
+      console.log(pc.yellow(`⚠ Unknown module(s): ${modules.join(', ')}`));
+      console.log(`Valid modules: ${pc.cyan(validDomains.join(', '))}, or run ${pc.cyan('acidtest demo')}.\n`);
+      return 1;
+    }
+    suitesToRun = matched;
   } else if (discovery.activeDomains.length > 0) {
-    // Auto-detected active domains in user's project
     suitesToRun = allSuites.filter(s => discovery.activeDomains.includes(s.domain));
     const skipped = discovery.skippedDomains.map(s => s.domain.toUpperCase()).join(', ');
     console.log(pc.dim(`• Auditing ${suitesToRun.length} auto-detected module(s). Skipped unconfigured: ${skipped}\n`));
   } else {
-    // Zero modules detected in current directory
     console.log(pc.yellow(`ℹ No supported backend integrations (Stripe, PostgreSQL, Clerk, BullMQ, etc.) detected in this directory.`));
     console.log(`\nTo run an audit:`);
     console.log(`  1. Run ${pc.cyan('npx @acidtest/cli demo')} to try out live adversarial fuzzing on an in-memory proving ground.`);

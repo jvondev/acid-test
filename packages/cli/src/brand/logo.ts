@@ -1,9 +1,9 @@
-// 🏛️ ACIDTEST DEDICATED BRAND IDENTITY, LOGO & BANNER GENERATOR
+// 🏛️ ACID-TEST DEDICATED BRAND IDENTITY, LOGO & BANNER GENERATOR
 // Zero-slop engineering precision: "Verify Atomicity, Consistency, Isolation & Durability."
 
 import { getGradientAnsi, colorizeText } from './palette.js';
 
-export const BRAND_NAME = 'acidtest';
+export const BRAND_NAME = 'acid-test';
 export const BRAND_VERSION = '1.0.0';
 export const BRAND_TAGLINE = 'Verify Atomicity, Consistency, Isolation & Durability.';
 
@@ -17,8 +17,8 @@ export const DROPLET_ROWS = [
 ];
 
 export const WORDMARK_ROWS = [
-  '▄▀█ █▀▀ █ █▀▄ ▀█▀ █▀▀ █▀▀ ▀█▀',
-  '█▀█ █▄▄ █ █▄▀  █  ██▄ ▄██  █ ',
+  '▄▀█ █▀▀ █ █▀▄     ▀█▀ █▀▀ █▀▀ ▀█▀',
+  '█▀█ █▄▄ █ █▄▀ ▀▀▀  █  ██▄ ▄██  █ ',
 ];
 
 export interface HeaderOptions {

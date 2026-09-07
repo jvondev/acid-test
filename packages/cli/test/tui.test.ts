@@ -6,7 +6,7 @@ import { exportHtmlAuditReport } from '../src/tui/export-html.js';
 import { ScreenBuffer } from '../src/tui/buffer.js';
 import { BRAND_GRADIENT_LUT, getGradientAnsi } from '../src/brand/palette.js';
 
-describe('Acidtest Stage-Based Drill-Down TUI Suite', () => {
+describe('Acid-test Stage-Based Drill-Down TUI Suite', () => {
   it('safeTruncate clamps text with ellipsis accurately', () => {
     expect(safeTruncate('Concurrent Webhook Burst Idempotency Guard', 20)).toBe('Concurrent Webhook …');
     expect(safeTruncate('Short', 10)).toBe('Short');
@@ -78,7 +78,7 @@ describe('Acidtest Stage-Based Drill-Down TUI Suite', () => {
 
   it('ScreenBuffer supports in-place cell mutation and differential diffing', () => {
     const buffer = new ScreenBuffer(80, 24);
-    buffer.drawText(0, 0, 'Acidtest');
+    buffer.drawText(0, 0, 'Acid-test');
     expect(buffer.cols).toBe(80);
     expect(buffer.rows).toBe(24);
 

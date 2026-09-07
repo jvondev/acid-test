@@ -1,7 +1,7 @@
 ﻿# 09 — Report Engine & Local Studio Specification (`@acid-test/core` & `@acid-test/studio`)
 
 ## 1. Scope & Core Objectives
-This specification governs how `Acidtest` formats, presents, and exports audit findings across:
+This specification governs how `Acid-test` formats, presents, and exports audit findings across:
 1. **Interactive Terminal Output:** Clean, high-density terminal cards (Chalk + Ora spinners + Boxen).
 2. **Executive Business Reports:** Plain-English summary, risk score, and estimated monthly financial loss ($/mo).
 3. **Machine-Readable AI Remediation Payloads:** Exact reproduction cURL commands, failing source lines, and automated fix prompts for AI coding agents.
@@ -14,7 +14,7 @@ This specification governs how `Acidtest` formats, presents, and exports audit f
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│  ACIDTEST v0.1.0 • SYSTEM INTEGRITY & ACID AUDIT REPORT                     │
+│  ACID-TEST v0.1.0 • SYSTEM INTEGRITY & ACID AUDIT REPORT                     │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │  Target: http://localhost:3000 • Database: PostgreSQL (Supabase)            │
 │  Timestamp: 2026-08-31 12:30:00 UTC • Duration: 2.4s                       │
@@ -35,8 +35,8 @@ This specification governs how `Acidtest` formats, presents, and exports audit f
 │  2. [DB] Table `organization_invoices` lacks RLS policy (Cross-Tenant Leak) │
 │     File: db/schema.ts:L88                                                  │
 │                                                                             │
-│  📄 Full HTML Report: .acidtest/reports/audit-2026-08-31.html               │
-│  🤖 AI Fix Prompt:    .acidtest/remediation.prompt.md                      │
+│  📄 Full HTML Report: .acid-test/reports/audit-2026-08-31.html               │
+│  🤖 AI Fix Prompt:    .acid-test/remediation.prompt.md                      │
 │  🌐 Open Studio:      npx @acid-test/cli studio                              │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -45,7 +45,7 @@ This specification governs how `Acidtest` formats, presents, and exports audit f
 
 ## 3. Financial Risk Calculation Formula
 
-`Acidtest` calculates an estimated monthly dollar-risk exposure based on discovered failure modes:
+`Acid-test` calculates an estimated monthly dollar-risk exposure based on discovered failure modes:
 
 $$\text{Monthly Risk (\$)} = (\text{Avg Transaction Value} \times \text{Est. Failure Probability} \times \text{Monthly Volume}) + \text{Compliance Penalty Risk}$$
 
@@ -55,7 +55,7 @@ $$\text{Monthly Risk (\$)} = (\text{Avg Transaction Value} \times \text{Est. Fai
 
 ---
 
-## 4. Machine-Readable AI Remediation Schema (`.acidtest/remediation.json`)
+## 4. Machine-Readable AI Remediation Schema (`.acid-test/remediation.json`)
 
 ```json
 {

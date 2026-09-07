@@ -1,4 +1,4 @@
-// 🏛️ ACIDTEST 2D SCREEN BUFFER (HIGH-PERFORMANCE DIFFERENTIAL RASTERIZER)
+// 🏛️ ACID-TEST 2D SCREEN BUFFER (HIGH-PERFORMANCE DIFFERENTIAL RASTERIZER)
 // Zero-Allocation In-Place Cell Pool, Double-Buffering & DEC Mode 2026 Synchronized Output
 // Eliminates CPU lag, pipe saturation, and screen tearing with O(dirty_cells) delta rasterization
 

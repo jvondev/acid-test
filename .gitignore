@@ -17,7 +17,9 @@ out/
 .env.production
 .env.staging
 
-# Acidtest local run logs and reports
+# Acid-test local run logs and reports
+.acid-test/
+**/.acid-test/
 .acidtest/
 **/.acidtest/
 

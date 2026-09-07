@@ -1,7 +1,7 @@
-﻿{
+{
   "name": "@acid-test/storage",
   "version": "1.0.0",
-  "description": "Object storage security auditor supporting AWS S3, Cloudflare R2, and Supabase Storage for Acidtest",
+  "description": "Object storage security auditor supporting AWS S3, Cloudflare R2, and Supabase Storage for acid-test",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

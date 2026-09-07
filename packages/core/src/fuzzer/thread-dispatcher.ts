@@ -22,6 +22,7 @@ export class ThreadDispatcher {
       const workerPromise = new Promise<BurstResponse>((resolve, reject) => {
         const worker = new Worker(workerFile, {
           workerData: {
+            __isAcidTestWorker: true,
             __isAcidtestWorker: true,
             workerId: i + 1,
             url,

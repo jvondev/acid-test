@@ -52,7 +52,7 @@ export const HeaderRibbon: React.FC<HeaderProps> = ({
         <Box justifyContent="space-between" width={columns} flexWrap="nowrap">
           <Box gap={1} flexWrap="nowrap">
             <Text bold color="green">
-              ◆ acidtest
+              ◆ acid-test
             </Text>
             <Text color="gray">{THEME.symbols.divider}</Text>
             <Text color="white">{targetDisplay}</Text>

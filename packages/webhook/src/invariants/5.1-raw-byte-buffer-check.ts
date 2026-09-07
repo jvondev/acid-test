@@ -1,4 +1,4 @@
-﻿import {
+import {
   type InvariantTest,
   type ExecutionContext,
   type InvariantResult,
@@ -18,7 +18,7 @@ export class RawByteBufferCheckTest implements InvariantTest {
   async run(context: ExecutionContext): Promise<InvariantResult> {
     const startTime = Date.now();
     const targetUrl = context.targetUrl || 'http://localhost:3000/api/webhooks/shopify';
-    const secret = context.webhookSecret || 'shpss_acidtest_test_secret_key_12345';
+    const secret = context.webhookSecret || 'shpss_acid_test_test_secret_key_12345';
 
     // JSON payload with irregular un-normalized whitespace
     const rawWhitespacePayload = RawBufferUtils.mutateJsonWhitespace({

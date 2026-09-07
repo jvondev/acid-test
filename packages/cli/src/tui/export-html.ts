@@ -1,11 +1,11 @@
-﻿import fs from 'node:fs';
+import fs from 'node:fs';
 import path from 'node:path';
 import type { InvariantResult, AuditReport } from '@acid-test/core';
 import { HtmlReporter, FinancialRiskCalculator } from '@acid-test/core';
 
 export function exportHtmlAuditReport(results: InvariantResult[], targetUrl: string): string | null {
   try {
-    const dir = path.join(process.cwd(), '.acidtest', 'reports');
+    const dir = path.join(process.cwd(), '.acid-test', 'reports');
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });
     }

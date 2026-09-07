@@ -1,7 +1,7 @@
-﻿{
+{
   "name": "@acid-test/queue",
   "version": "1.0.0",
-  "description": "Queue chaos runner supporting BullMQ, Redis Streams, AWS SQS, and QStash for Acidtest",
+  "description": "Queue chaos runner supporting BullMQ, Redis Streams, AWS SQS, and QStash for acid-test",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

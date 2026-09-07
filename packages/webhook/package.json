@@ -1,7 +1,7 @@
-﻿{
+{
   "name": "@acid-test/webhook",
   "version": "1.0.0",
-  "description": "Ingress security guard supporting GitHub, Shopify, Slack, Svix, and Resend for Acidtest",
+  "description": "Ingress security guard supporting GitHub, Shopify, Slack, Svix, and Resend for acid-test",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

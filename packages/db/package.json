@@ -1,7 +1,7 @@
-﻿{
+{
   "name": "@acid-test/db",
   "version": "1.0.0",
-  "description": "Production database auditor supporting PostgreSQL, Supabase, Neon, Drizzle, and Prisma for Acidtest",
+  "description": "Production database auditor supporting PostgreSQL, Supabase, Neon, Drizzle, and Prisma for acid-test",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

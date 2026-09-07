@@ -1,7 +1,7 @@
-﻿{
+{
   "name": "@acid-test/studio",
   "version": "1.0.0",
-  "description": "Zero-config local visual dashboard on localhost:4400 for Acidtest",
+  "description": "Zero-config local visual dashboard on localhost:4400 for acid-test",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

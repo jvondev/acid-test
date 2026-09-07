@@ -1,4 +1,4 @@
-﻿import pc from 'picocolors';
+import pc from 'picocolors';
 import { TestRunner, TerminalReporter } from '@acid-test/core';
 import { createStorageSuite } from '@acid-test/storage';
 import type { AuditOptions } from './audit.js';
@@ -7,7 +7,7 @@ export async function runStorageCommand(options: AuditOptions & { provider?: str
   const provider = options.provider || 's3';
   const suite = createStorageSuite(provider);
 
-  console.log(pc.bold(pc.cyan(`\n⚡ Launching Acidtest Object Storage & Blob Security Auditor (${provider.toUpperCase()})...`)));
+  console.log(pc.bold(pc.cyan(`\n⚡ Launching Acid-test Object Storage & Blob Security Auditor (${provider.toUpperCase()})...`)));
   const report = await TestRunner.runSuite(suite, {
     targetUrl: options.url || 'http://localhost:3000/api/storage',
     concurrency: options.concurrency ? parseInt(options.concurrency, 10) : 10,

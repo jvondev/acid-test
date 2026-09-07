@@ -1,4 +1,4 @@
-﻿import http from 'node:http';
+import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import pc from 'picocolors';
@@ -66,8 +66,11 @@ export class StudioServer {
 
         // API: Read AI Remediation payload
         if (pathname === '/api/remediation') {
-          const remFile = path.resolve(process.cwd(), '.acidtest/remediation.json');
-          if (fs.existsSync(remFile)) {
+          const remFile = [
+            path.resolve(process.cwd(), '.acid-test/remediation.json'),
+            path.resolve(process.cwd(), '.acidtest/remediation.json'),
+          ].find((f) => fs.existsSync(f));
+          if (remFile && fs.existsSync(remFile)) {
             const data = fs.readFileSync(remFile, 'utf8');
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(data);
@@ -117,7 +120,7 @@ export class StudioServer {
       this.server.listen(this.port, this.host, () => {
         if (!this.silent) {
           console.log(pc.cyan(`\n  ┌─────────────────────────────────────────────────────────────┐`));
-          console.log(pc.cyan(`  │ `) + pc.bold(pc.white(`ACIDTEST STUDIO RUNNING AT: `)) + pc.bold(pc.green(`http://${this.host}:${this.port}`)).padEnd(30) + pc.cyan(`│`));
+          console.log(pc.cyan(`  │ `) + pc.bold(pc.white(`ACID-TEST STUDIO RUNNING AT: `)) + pc.bold(pc.green(`http://${this.host}:${this.port}`)).padEnd(30) + pc.cyan(`│`));
           console.log(pc.cyan(`  │ `) + pc.dim(`Realtime event timeline, risk model, and 1-click replay   `) + pc.cyan(`│`));
           console.log(pc.cyan(`  └─────────────────────────────────────────────────────────────┘\n`));
         }

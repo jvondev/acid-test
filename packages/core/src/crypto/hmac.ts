@@ -45,7 +45,7 @@ export class MultiProviderHmacEngine {
       }
       default: {
         const signature = createHmac('sha256', secret).update(rawBuffer).digest('hex');
-        return { headerName: 'x-acidtest-signature', headerValue: `sha256=${signature}`, timestamp, rawSignature: signature };
+        return { headerName: 'x-acid-test-signature', headerValue: `sha256=${signature}`, timestamp, rawSignature: signature };
       }
     }
   }

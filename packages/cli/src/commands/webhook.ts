@@ -1,4 +1,4 @@
-﻿import pc from 'picocolors';
+import pc from 'picocolors';
 import { TestRunner, TerminalReporter } from '@acid-test/core';
 import { createWebhookSuite } from '@acid-test/webhook';
 import type { AuditOptions } from './audit.js';
@@ -7,7 +7,7 @@ export async function runWebhookCommand(options: AuditOptions & { provider?: str
   const provider = options.provider || 'shopify';
   const suite = createWebhookSuite(provider);
 
-  console.log(pc.bold(pc.cyan(`\n⚡ Launching Acidtest Webhook Ingress & Cryptographic Security Auditor (${provider.toUpperCase()})...`)));
+  console.log(pc.bold(pc.cyan(`\n⚡ Launching Acid-test Webhook Ingress & Cryptographic Security Auditor (${provider.toUpperCase()})...`)));
   const report = await TestRunner.runSuite(suite, {
     targetUrl: options.url || 'http://localhost:3000/api/webhooks/shopify',
     webhookSecret: options.secret,

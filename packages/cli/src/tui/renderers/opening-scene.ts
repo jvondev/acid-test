@@ -47,7 +47,7 @@ export function drawOpeningScene(buffer: ScreenBuffer, props: OpeningSceneProps)
       buffer.setCell(x, y, ' ', { bg: BG_CARD });
     }
   }
-  buffer.drawBox(cardX, cardY, cardW, cardH, 'ACIDTEST INITIALIZING GATE', {
+  buffer.drawBox(cardX, cardY, cardW, cardH, 'ACID-TEST INITIALIZING GATE', {
     fg: EMERALD,
     bg: BG_CARD,
   });

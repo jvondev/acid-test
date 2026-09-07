@@ -1,4 +1,4 @@
-﻿import fs from 'node:fs';
+import fs from 'node:fs';
 import path from 'node:path';
 import type { AuditReport, AiRemediationIssue } from '../types/index.js';
 
@@ -8,7 +8,7 @@ export class AiRemediationExporter {
    */
   static exportRemediation(
     report: AuditReport,
-    outputDir: string = '.acidtest'
+    outputDir: string = '.acid-test'
   ): { jsonPath: string; promptPath: string; htmlPath: string } {
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir, { recursive: true });
@@ -50,7 +50,7 @@ export class AiRemediationExporter {
 
     // Generate Markdown prompt
     const promptLines: string[] = [];
-    promptLines.push(`# Acidtest AI Remediation Prompt`);
+    promptLines.push(`# Acid-test AI Remediation Prompt`);
     promptLines.push(`> **Audit Target:** \`${report.target}\` | **Health Grade:** \`${report.healthGrade}\` | **Financial Exposure:** \`$${report.totalRiskUsd}/mo\``);
     promptLines.push(``);
     promptLines.push(`You are an expert distributed systems engineer. An automated ACID audit detected ${issues.length} critical reliability and security defect(s).`);

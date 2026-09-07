@@ -144,7 +144,7 @@ export function drawHelpModal(buffer: ScreenBuffer, startX: number, startY: numb
     ['[← / →]', 'Switch domain tabs horizontally (Apple-grade spatial mapping)'],
     ['[1 - 9]', 'Switch domain tabs directly (Billing, DB, Auth, Queue, etc.)'],
     ['[Enter]', 'Inspect selected invariant and read diagnostics (Safe/Read-Only)'],
-    ['[P]', 'Export AI Remediation Prompt to .acidtest/remediation.prompt.md'],
+    ['[P]', 'Export AI Remediation Prompt to .acid-test/remediation.prompt.md'],
     ['[Space / A]', 'Replay Adversarial Concurrency Telemetry'],
     ['[V]', 'Toggle ACID Reliability Compliance Scorecard'],
     ['[C]', 'Configure Concurrency (N) & Microsecond Jitter'],

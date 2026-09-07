@@ -24,7 +24,7 @@ export interface AuditOptions {
 }
 
 export async function runAudit(modules: string[], options: AuditOptions): Promise<number> {
-  // Fuzzy alias routing: if user ran `acidtest audit demo`, execute demo proving ground
+  // Fuzzy alias routing: if user ran `acid-test audit demo`, execute demo proving ground
   if (modules.includes('demo') || modules.includes('fuzz')) {
     return runDemoCommand();
   }
@@ -100,7 +100,7 @@ export async function runAudit(modules: string[], options: AuditOptions): Promis
     const matched = allSuites.filter(s => modules.includes(s.domain));
     if (matched.length === 0) {
       console.log(pc.yellow(`⚠ Unknown module(s): ${modules.join(', ')}`));
-      console.log(`Valid modules: ${pc.cyan(validDomains.join(', '))}, or run ${pc.cyan('acidtest demo')}.\n`);
+      console.log(`Valid modules: ${pc.cyan(validDomains.join(', '))}, or run ${pc.cyan('acid-test demo')}.\n`);
       return 1;
     }
     suitesToRun = matched;

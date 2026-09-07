@@ -1,15 +1,15 @@
-﻿import fs from 'node:fs';
+import fs from 'node:fs';
 import path from 'node:path';
 import type { InvariantResult } from '@acid-test/core';
 
 export function exportPromptToFile(result?: InvariantResult): boolean {
   if (!result) return false;
-  const dir = path.join(process.cwd(), '.acidtest');
+  const dir = path.join(process.cwd(), '.acid-test');
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
 
-  const promptContent = `# ⚡ ACIDTEST AI REMEDIATION PROMPT
+  const promptContent = `# ⚡ ACID-TEST AI REMEDIATION PROMPT
 ## Vulnerability: [${result.testId}] ${result.title || result.testName}
 - **Severity**: ${result.severity}
 - **Category**: ${result.category}
@@ -31,11 +31,11 @@ ${result.suggestedFix || 'Apply PostgreSQL SERIALIZABLE transaction isolation or
 
 ### Reproduction Command:
 \`\`\`bash
-${result.curlReproduction || '# Run acidtest CLI with concurrency to reproduce'}
+${result.curlReproduction || '# Run acid-test CLI with concurrency to reproduce'}
 \`\`\`
 
 ---
-*Generated automatically by Acidtest Reliability Cockpit*
+*Generated automatically by Acid-test Reliability Cockpit*
 `;
 
   const targetFile = path.join(dir, 'remediation.prompt.md');

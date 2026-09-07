@@ -1,4 +1,4 @@
-﻿import pc from 'picocolors';
+import pc from 'picocolors';
 import { TestRunner, TerminalReporter } from '@acid-test/core';
 import { createQueueSuite } from '@acid-test/queue';
 import type { AuditOptions } from './audit.js';
@@ -7,7 +7,7 @@ export async function runQueueCommand(options: AuditOptions & { provider?: strin
   const provider = options.provider || 'bullmq';
   const suite = createQueueSuite(provider);
 
-  console.log(pc.bold(pc.cyan(`\n⚡ Launching Acidtest Distributed Queue Chaos Auditor (${provider.toUpperCase()})...`)));
+  console.log(pc.bold(pc.cyan(`\n⚡ Launching Acid-test Distributed Queue Chaos Auditor (${provider.toUpperCase()})...`)));
   const report = await TestRunner.runSuite(suite, {
     targetUrl: options.url || 'http://localhost:3000/api/jobs',
     redisUrl: options.redis,

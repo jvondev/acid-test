@@ -1,4 +1,4 @@
-// Emil-grade typography, formatting, and layout tokens for Acidtest TUI
+// Emil-grade typography, formatting, and layout tokens for Acid-test TUI
 // Engineered for zero cognitive overload, high contrast, and dark terminal aesthetic
 
 export * from '../brand/index.js';

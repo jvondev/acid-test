@@ -1,4 +1,4 @@
-﻿import pc from 'picocolors';
+import pc from 'picocolors';
 import { TestRunner, TerminalReporter } from '@acid-test/core';
 import { createDbSuite } from '@acid-test/db';
 import type { AuditOptions } from './audit.js';
@@ -7,7 +7,7 @@ export async function runDbCommand(options: AuditOptions & { provider?: string }
   const provider = options.provider || 'postgresql';
   const suite = createDbSuite(provider);
 
-  console.log(pc.bold(pc.cyan(`\n⚡ Launching Acidtest Database & RLS Isolation Auditor (${provider.toUpperCase()})...`)));
+  console.log(pc.bold(pc.cyan(`\n⚡ Launching Acid-test Database & RLS Isolation Auditor (${provider.toUpperCase()})...`)));
   const report = await TestRunner.runSuite(suite, {
     dbUrl: options.db,
     concurrency: options.concurrency ? parseInt(options.concurrency, 10) : 10,

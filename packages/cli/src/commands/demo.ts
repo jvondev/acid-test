@@ -1,4 +1,4 @@
-﻿import pc from 'picocolors';
+import pc from 'picocolors';
 import { SandboxServer, TestRunner, TerminalReporter } from '@acid-test/core';
 import { createBillingSuite } from '@acid-test/billing';
 
@@ -7,7 +7,7 @@ export async function runDemoCommand(): Promise<number> {
   const rule = pc.dim('─'.repeat(width));
 
   console.log('');
-  console.log(` ${pc.bold(pc.cyan('⚡ ACIDTEST'))} ${pc.bold(pc.white('ADVERSARIAL PROVING GROUND & CHAOS SIMULATION'))}`);
+  console.log(` ${pc.bold(pc.cyan('⚡ ACID-TEST'))} ${pc.bold(pc.white('ADVERSARIAL PROVING GROUND & CHAOS SIMULATION'))}`);
   console.log(` ${pc.dim('Executing real microsecond concurrency bursts against Vulnerable vs Hardened targets')}`);
   console.log(` ${rule}`);
 
@@ -44,6 +44,6 @@ export async function runDemoCommand(): Promise<number> {
   await hardenedServer.stop();
 
   console.log(` ${pc.bold(pc.green('✓ Adversarial proving ground completed successfully.'))}`);
-  console.log(` ${pc.dim('Reports & AI prompts generated at .acidtest/\n')}`);
+  console.log(` ${pc.dim('Reports & AI prompts generated at .acid-test/\n')}`);
   return 0;
 }

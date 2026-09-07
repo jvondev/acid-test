@@ -195,7 +195,7 @@ export const TuiApp: React.FC<TuiAppProps> = ({ initialUrl, autoRun = true }) =>
   const handleAutoFix = () => {
     if (!selectedResult) return;
     const ok = exportPromptToFile(selectedResult);
-    showToast(ok ? 'Prompt exported to .acidtest/remediation.prompt.md' : 'Failed to export prompt');
+    showToast(ok ? 'Prompt exported to .acid-test/remediation.prompt.md' : 'Failed to export prompt');
   };
 
   const handleExportHtml = () => {

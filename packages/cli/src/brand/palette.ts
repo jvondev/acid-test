@@ -1,4 +1,4 @@
-// 🎨 ACIDTEST DEDICATED BRAND PALETTE & TRUECOLOR GRADIENT ENGINE
+// 🎨 ACID-TEST DEDICATED BRAND PALETTE & TRUECOLOR GRADIENT ENGINE
 // Engineered for zero cognitive overload, high contrast, and dark terminal aesthetic
 
 export const BRAND_COLORS = {

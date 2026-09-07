@@ -1,5 +1,5 @@
 {
-  "$schema": "https://acidtest.dev/schema.json",
+  "$schema": "https://acid-test.dev/schema.json",
   "target": {
     "url": "http://localhost:3000",
     "database": "postgresql://postgres:postgres@localhost:5432/mydb",

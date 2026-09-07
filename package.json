@@ -1,13 +1,13 @@
 {
-  "name": "acidtest-monorepo",
+  "name": "@acid-test/monorepo",
   "version": "1.0.0",
   "type": "module",
   "private": true,
   "description": "Adversarial backend reliability, security, and chaos-testing suite for modern distributed backends",
   "main": "index.js",
   "bin": {
-    "acidtest": "./bin/cli.js",
-    "acid-test": "./bin/cli.js"
+    "acid-test": "./bin/cli.js",
+    "acidtest": "./bin/cli.js"
   },
   "scripts": {
     "build": "turbo run build",

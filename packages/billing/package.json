@@ -1,7 +1,7 @@
-﻿{
+{
   "name": "@acid-test/billing",
   "version": "1.0.0",
-  "description": "Production billing fuzzer supporting Stripe, LemonSqueezy, Paddle, and Shopify for Acidtest",
+  "description": "Production billing fuzzer supporting Stripe, LemonSqueezy, Paddle, and Shopify for acid-test",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

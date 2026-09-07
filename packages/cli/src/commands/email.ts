@@ -1,4 +1,4 @@
-﻿import pc from 'picocolors';
+import pc from 'picocolors';
 import { TestRunner, TerminalReporter } from '@acid-test/core';
 import { createEmailSuite } from '@acid-test/email';
 import type { AuditOptions } from './audit.js';
@@ -7,7 +7,7 @@ export async function runEmailCommand(options: AuditOptions & { provider?: strin
   const provider = options.provider || 'resend';
   const suite = createEmailSuite(provider);
 
-  console.log(pc.bold(pc.cyan(`\n⚡ Launching Acidtest Transactional Email & Communication Auditor (${provider.toUpperCase()})...`)));
+  console.log(pc.bold(pc.cyan(`\n⚡ Launching Acid-test Transactional Email & Communication Auditor (${provider.toUpperCase()})...`)));
   const report = await TestRunner.runSuite(suite, {
     targetUrl: options.url || 'http://localhost:3000/api/email',
     concurrency: options.concurrency ? parseInt(options.concurrency, 10) : 10,

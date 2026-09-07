@@ -1,4 +1,4 @@
-﻿import {
+import {
   type InvariantTest,
   type ExecutionContext,
   type InvariantResult,
@@ -17,7 +17,7 @@ export class DoubleCheckoutCompletionTest implements InvariantTest {
   async run(context: ExecutionContext): Promise<InvariantResult> {
     const startTime = Date.now();
     const targetUrl = context.targetUrl || 'http://localhost:3000/api/webhooks/stripe';
-    const secret = context.webhookSecret || 'whsec_acidtest_test_secret_key_12345';
+    const secret = context.webhookSecret || 'whsec_acid_test_test_secret_key_12345';
     const sessionId = `cs_test_double_${Date.now()}`;
     const customerId = `cus_double_${Date.now()}`;
 

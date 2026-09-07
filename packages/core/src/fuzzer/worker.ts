@@ -4,6 +4,7 @@ import https from 'node:https';
 import { URL } from 'node:url';
 
 interface WorkerPayload {
+  __isAcidTestWorker?: boolean;
   __isAcidtestWorker?: boolean;
   workerId: number;
   url: string;
@@ -115,7 +116,7 @@ async function runWorker() {
   parentPort?.postMessage(result);
 }
 
-if (parentPort && workerData?.__isAcidtestWorker === true) {
+if (parentPort && (workerData?.__isAcidTestWorker === true || workerData?.__isAcidtestWorker === true)) {
   runWorker().catch((err) => {
     parentPort?.postMessage({
       workerId: workerData?.workerId ?? -1,

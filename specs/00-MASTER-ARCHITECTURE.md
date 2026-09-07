@@ -1,7 +1,7 @@
-﻿# 00 — Acidtest Master Architecture & Systems Specification
+﻿# 00 — Acid-test Master Architecture & Systems Specification
 
 ## 1. System Mission & Core Paradigm
-`Acidtest` is an adversarial backend reliability, security, and chaos-testing suite designed to audit distributed web applications, databases, payment gateways, and asynchronous pipelines against the universal laws of **Atomicity**, **Consistency**, **Isolation**, and **Durability (ACID)**.
+`Acid-test` is an adversarial backend reliability, security, and chaos-testing suite designed to audit distributed web applications, databases, payment gateways, and asynchronous pipelines against the universal laws of **Atomicity**, **Consistency**, **Isolation**, and **Durability (ACID)**.
 
 It is built for two distinct audiences:
 1. **Non-Technical Founders & Business Owners:** Outputs human-readable risk assessments, plain-English root causes, estimated financial loss calculations, and simple pass/fail health grades.
@@ -14,7 +14,7 @@ It is built for two distinct audiences:
 The project is structured as a TypeScript monorepo managed with **pnpm workspaces** and **Turborepo**:
 
 ```
-acidtest/
+acid-test/
 ├── package.json                   -> Root workspace metadata & scripts
 ├── pnpm-workspace.yaml            -> Workspace package boundaries
 ├── turbo.json                     -> Build & test pipeline cache
@@ -71,10 +71,10 @@ flowchart TD
 
 ### Stage 5: Dual-Layer Report Generation
 - Prints an interactive terminal report (colored progress spinners, summary cards, and risk badges).
-- Generates a standalone, styled HTML audit report (`.acidtest/reports/audit-[timestamp].html`) and Markdown summary.
+- Generates a standalone, styled HTML audit report (`.acid-test/reports/audit-[timestamp].html`) and Markdown summary.
 
 ### Stage 6: AI Remediation Payload Export
-- Generates `.acidtest/remediation.json` and a formatted prompt ready to pipe directly into Cursor, Claude Code, or Antigravity to fix the discovered code defects.
+- Generates `.acid-test/remediation.json` and a formatted prompt ready to pipe directly into Cursor, Claude Code, or Antigravity to fix the discovered code defects.
 
 ---
 

@@ -28,14 +28,14 @@ export class HtmlReportGenerator {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acidtest Audit Report • ${module.toUpperCase()}</title>
+  <title>Acid-test Audit Report • ${module.toUpperCase()}</title>
   <style>${HTML_REPORT_STYLES}</style>
 </head>
 <body>
   <div class="container">
     <div class="header">
       <div class="title-group">
-        <h1>Acidtest Integrity Audit</h1>
+        <h1>Acid-test Integrity Audit</h1>
         <p>Target: <code>${target}</code> • Module: <strong>${module.toUpperCase()}</strong> (${provider}) • Report ID: <code>${id}</code></p>
       </div>
       <div class="grade-badge grade-${healthGrade}">${healthGrade} (${healthScore}/100)</div>
@@ -84,7 +84,7 @@ export class HtmlReportGenerator {
     </table>
 
     <div class="footer">
-      Generated automatically by Acidtest Adversarial Audit Engine • Timestamp: ${timestamp}
+      Generated automatically by Acid-test Adversarial Audit Engine • Timestamp: ${timestamp}
     </div>
   </div>
 </body>

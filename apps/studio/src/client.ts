@@ -8,13 +8,13 @@ export class StudioClientHtml {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acidtest Studio • Reliability & Chaos Control</title>
+  <title>Acid-test Studio • Reliability & Chaos Control</title>
   <style>${STUDIO_STYLES}</style>
 </head>
 <body>
   <div class="app-container">
     <div class="sidebar">
-      <div class="logo">⚡ ACIDTEST STUDIO</div>
+      <div class="logo">⚡ ACID-TEST STUDIO</div>
       <div class="nav-item active">📊 Dashboard</div>
       <div class="nav-item" onclick="triggerAudit()">⚡ Run Full Audit</div>
       <div class="nav-item" onclick="copyAiPrompt()">🤖 Copy AI Prompt</div>

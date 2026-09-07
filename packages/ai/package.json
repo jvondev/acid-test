@@ -1,7 +1,7 @@
-﻿{
+{
   "name": "@acid-test/ai",
   "version": "1.0.0",
-  "description": "AI gateway auditor supporting OpenAI, Anthropic, Gemini, and Ollama for Acidtest",
+  "description": "AI gateway auditor supporting OpenAI, Anthropic, Gemini, and Ollama for acid-test",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

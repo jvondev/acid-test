@@ -1,7 +1,7 @@
-﻿{
+{
   "name": "@acid-test/core",
   "version": "1.0.0",
-  "description": "Core test runner, concurrent microsecond burst fuzzer, crypto engine, and dual-layer reporter for Acidtest",
+  "description": "Core test runner, concurrent microsecond burst fuzzer, crypto engine, and dual-layer reporter for acid-test",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

@@ -1,7 +1,7 @@
-﻿{
+{
   "name": "@acid-test/email",
   "version": "1.0.0",
-  "description": "Transactional email and template guard supporting Resend, Postmark, and SendGrid for Acidtest",
+  "description": "Transactional email and template guard supporting Resend, Postmark, and SendGrid for acid-test",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

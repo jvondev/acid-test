@@ -18,7 +18,7 @@ export class TerminalReporter {
     // 1. Header Ribbon (Quiet context strip)
     lines.push('');
     lines.push(
-      ` ${pc.bold(pc.cyan('⚡ acidtest'))} ${pc.dim('v' + report.version)}  ${pc.dim('•')}  ${pc.white(report.target)}  ${pc.dim('•')}  ${pc.dim((report.durationMs / 1000).toFixed(2) + 's')}  ${pc.dim('•')}  Health: ${healthColor(pc.bold(report.healthGrade + ` (${report.healthScore}/100)`))}  ${pc.dim('•')}  Risk: ${riskColor(pc.bold('$' + Math.round(report.totalRiskUsd).toLocaleString() + '/mo'))}`
+      ` ${pc.bold(pc.cyan('⚡ acid-test'))} ${pc.dim('v' + report.version)}  ${pc.dim('•')}  ${pc.white(report.target)}  ${pc.dim('•')}  ${pc.dim((report.durationMs / 1000).toFixed(2) + 's')}  ${pc.dim('•')}  Health: ${healthColor(pc.bold(report.healthGrade + ` (${report.healthScore}/100)`))}  ${pc.dim('•')}  Risk: ${riskColor(pc.bold('$' + Math.round(report.totalRiskUsd).toLocaleString() + '/mo'))}`
     );
     lines.push(` ${rule}`);
 
@@ -64,9 +64,9 @@ export class TerminalReporter {
     // 5. Artifact Footer
     lines.push('');
     lines.push(` ${rule}`);
-    lines.push(`  ${pc.dim('📄 HTML Report: ')} ${pc.white(`.acidtest/reports/audit-${report.id}.html`)}`);
-    lines.push(`  ${pc.dim('🤖 AI Prompt:   ')} ${pc.white('.acidtest/remediation.prompt.md')}`);
-    lines.push(`  ${pc.dim('🌐 Studio UI:   ')} ${pc.cyan('npx acidtest studio')}`);
+    lines.push(`  ${pc.dim('📄 HTML Report: ')} ${pc.white(`.acid-test/reports/audit-${report.id}.html`)}`);
+    lines.push(`  ${pc.dim('🤖 AI Prompt:   ')} ${pc.white('.acid-test/remediation.prompt.md')}`);
+    lines.push(`  ${pc.dim('🌐 Studio UI:   ')} ${pc.cyan('npx @acid-test/cli studio')}`);
     lines.push('');
 
     return lines.join('\n');

@@ -1,11 +1,11 @@
-﻿# Context & Architecture Brief: Acidtest Backend Reliability & Chaos Suite
+﻿# Context & Architecture Brief: Acid-test Backend Reliability & Chaos Suite
 
 ### 1. System Overview & Architecture
-`Acidtest` is an adversarial reliability, security, and chaos-testing suite engineered to audit modern distributed web backends against the foundational laws of **Atomicity**, **Consistency**, **Isolation**, and **Durability (ACID)**.
+`Acid-test` is an adversarial reliability, security, and chaos-testing suite engineered to audit modern distributed web backends against the foundational laws of **Atomicity**, **Consistency**, **Isolation**, and **Durability (ACID)**.
 
 It is structured as a high-performance TypeScript monorepo managed with **pnpm workspaces + Turborepo**:
 
-* **Root Location:** [`D:\jvondev\acidtest`](file:///D:/jvondev/acidtest)
+* **Root Location:** [`D:\jvondev\acid-test`](file:///D:/jvondev/acid-test)
 * **Execution Harness:** `@acid-test/cli` (Global terminal runner with domain commands and platform aliases: `billing`/`stripe`, `db`/`pg`, `auth`/`clerk`, `queue`/`bullmq`, `webhook`, `ai`, `email`, `storage`).
 * **Core Systems Engine:** `@acid-test/core` (Cryptographic HMAC recalculation, concurrent burst fuzzer with microsecond jitter, SQL AST parser, dual-layer reporting engine).
 * **Domain Modules:** Dedicated packages under `packages/` (`billing`, `db`, `auth`, `queue`, `webhook`, `ai`, `email`, `storage`).
@@ -17,8 +17,8 @@ It is structured as a high-performance TypeScript monorepo managed with **pnpm w
 
 #### The Problem with Existing Developer Tools:
 1. **The "Happy Path" Fallacy:** Most audit tools test APIs with valid, sequential payloads. In production, real financial disasters happen when 2 duplicate webhooks arrive in 5ms, when transactions fail halfway through a 3-step action, or when an RLS policy is omitted on a single analytics table.
-2. **The "Passive Inspector" Commodity:** Building a tool that simply *displays* incoming JSON logs is a 10-minute commodity with zero moat. `Acidtest` actively executes **adversarial chaos injection**, **microsecond concurrent burst fuzzing**, and **multi-system ledger reconciliation**.
-3. **The Communication Gap:** Technical logs confuse non-technical founders; high-level summaries are useless to engineers. `Acidtest` solves this with a **Dual-Layer Report Engine**:
+2. **The "Passive Inspector" Commodity:** Building a tool that simply *displays* incoming JSON logs is a 10-minute commodity with zero moat. `Acid-test` actively executes **adversarial chaos injection**, **microsecond concurrent burst fuzzing**, and **multi-system ledger reconciliation**.
+3. **The Communication Gap:** Technical logs confuse non-technical founders; high-level summaries are useless to engineers. `Acid-test` solves this with a **Dual-Layer Report Engine**:
    - **Layer 1 (Executive):** Plain-English diagnosis, pass/fail grade, and estimated monthly financial loss ($/mo).
    - **Layer 2 (Engineering & AI):** Exact reproduction cURL bursts, failing SQL query traces, and ready-to-use AI remediation prompts.
 
@@ -28,7 +28,7 @@ It is structured as a high-performance TypeScript monorepo managed with **pnpm w
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                           ACIDTEST EXECUTION TOPOLOGY                       │
+│                           ACID-TEST EXECUTION TOPOLOGY                       │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
 │  1. TARGET INGRESS & HARNESS                                                │
@@ -42,9 +42,9 @@ It is structured as a high-performance TypeScript monorepo managed with **pnpm w
 │                              │                                              │
 │  3. DUAL-LAYER REPORT & ARTIFACT GENERATOR                                  │
 │     ├── Terminal UI (Chalk / Ora / Boxen summary cards)                     │
-│     ├── Executive HTML Report (.acidtest/reports/audit-[timestamp].html)    │
+│     ├── Executive HTML Report (.acid-test/reports/audit-[timestamp].html)    │
 │     ├── Local Visual Studio (localhost:4400)                                │
-│     └── Machine-Readable AI Remediation (.acidtest/remediation.json)        │
+│     └── Machine-Readable AI Remediation (.acid-test/remediation.json)        │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -67,15 +67,15 @@ It is structured as a high-performance TypeScript monorepo managed with **pnpm w
 ### 5. Artifact & Code References
 
 * **Universal Operating Rules:** [`AGENTS.md`](file:///D:/jvondev/freelance/AGENTS.md)
-* **Master Architecture Specification:** [`specs/00-MASTER-ARCHITECTURE.md`](file:///D:/jvondev/acidtest/specs/00-MASTER-ARCHITECTURE.md)
-* **Billing & Financial Invariant Spec:** [`specs/01-BILLING-SPEC.md`](file:///D:/jvondev/acidtest/specs/01-BILLING-SPEC.md)
-* **Database & RLS Isolation Spec:** [`specs/02-DATABASE-SPEC.md`](file:///D:/jvondev/acidtest/specs/02-DATABASE-SPEC.md)
-* **Auth & Identity Spec:** [`specs/03-AUTH-IDENTITY-SPEC.md`](file:///D:/jvondev/acidtest/specs/03-AUTH-IDENTITY-SPEC.md)
-* **Queue & Worker Chaos Spec:** [`specs/04-QUEUE-CHAOS-SPEC.md`](file:///D:/jvondev/acidtest/specs/04-QUEUE-CHAOS-SPEC.md)
-* **Webhook Ingress Spec:** [`specs/05-WEBHOOK-INGRESS-SPEC.md`](file:///D:/jvondev/acidtest/specs/05-WEBHOOK-INGRESS-SPEC.md)
-* **AI Gateway & Streaming Spec:** [`specs/06-AI-GATEWAY-SPEC.md`](file:///D:/jvondev/acidtest/specs/06-AI-GATEWAY-SPEC.md)
-* **Email & Communication Spec:** [`specs/07-EMAIL-COMMUNICATION-SPEC.md`](file:///D:/jvondev/acidtest/specs/07-EMAIL-COMMUNICATION-SPEC.md)
-* **Storage & Blob Security Spec:** [`specs/08-STORAGE-BLOB-SPEC.md`](file:///D:/jvondev/acidtest/specs/08-STORAGE-BLOB-SPEC.md)
-* **Report Engine & Studio Spec:** [`specs/09-REPORT-STUDIO-SPEC.md`](file:///D:/jvondev/acidtest/specs/09-REPORT-STUDIO-SPEC.md)
-* **Master Handoff Brief:** [`specs/10-AI-HANDOFF-BRIEF.md`](file:///D:/jvondev/acidtest/specs/10-AI-HANDOFF-BRIEF.md)
-* **Package Root:** [`package.json`](file:///D:/jvondev/acidtest/package.json)
+* **Master Architecture Specification:** [`specs/00-MASTER-ARCHITECTURE.md`](file:///D:/jvondev/acid-test/specs/00-MASTER-ARCHITECTURE.md)
+* **Billing & Financial Invariant Spec:** [`specs/01-BILLING-SPEC.md`](file:///D:/jvondev/acid-test/specs/01-BILLING-SPEC.md)
+* **Database & RLS Isolation Spec:** [`specs/02-DATABASE-SPEC.md`](file:///D:/jvondev/acid-test/specs/02-DATABASE-SPEC.md)
+* **Auth & Identity Spec:** [`specs/03-AUTH-IDENTITY-SPEC.md`](file:///D:/jvondev/acid-test/specs/03-AUTH-IDENTITY-SPEC.md)
+* **Queue & Worker Chaos Spec:** [`specs/04-QUEUE-CHAOS-SPEC.md`](file:///D:/jvondev/acid-test/specs/04-QUEUE-CHAOS-SPEC.md)
+* **Webhook Ingress Spec:** [`specs/05-WEBHOOK-INGRESS-SPEC.md`](file:///D:/jvondev/acid-test/specs/05-WEBHOOK-INGRESS-SPEC.md)
+* **AI Gateway & Streaming Spec:** [`specs/06-AI-GATEWAY-SPEC.md`](file:///D:/jvondev/acid-test/specs/06-AI-GATEWAY-SPEC.md)
+* **Email & Communication Spec:** [`specs/07-EMAIL-COMMUNICATION-SPEC.md`](file:///D:/jvondev/acid-test/specs/07-EMAIL-COMMUNICATION-SPEC.md)
+* **Storage & Blob Security Spec:** [`specs/08-STORAGE-BLOB-SPEC.md`](file:///D:/jvondev/acid-test/specs/08-STORAGE-BLOB-SPEC.md)
+* **Report Engine & Studio Spec:** [`specs/09-REPORT-STUDIO-SPEC.md`](file:///D:/jvondev/acid-test/specs/09-REPORT-STUDIO-SPEC.md)
+* **Master Handoff Brief:** [`specs/10-AI-HANDOFF-BRIEF.md`](file:///D:/jvondev/acid-test/specs/10-AI-HANDOFF-BRIEF.md)
+* **Package Root:** [`package.json`](file:///D:/jvondev/acid-test/package.json)

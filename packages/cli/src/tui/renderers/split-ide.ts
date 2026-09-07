@@ -141,7 +141,7 @@ export function drawSplitIde(
           ? '1. Analyzing AST defect...'
           : promptExportStep === 2
           ? '2. Synthesizing safe patch...'
-          : '3. Exported to .acidtest/remediation.prompt.md';
+          : '3. Exported to .acid-test/remediation.prompt.md';
       buffer.drawText(rightX + 2, actY, ` [⠋ AI PROMPT] `, { fg: BG_DARK, bg: BG_CYAN, bold: true });
       buffer.drawText(rightX + 18, actY, morphText, { fg: CYAN });
     } else {

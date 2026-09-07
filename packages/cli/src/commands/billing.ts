@@ -1,4 +1,4 @@
-﻿import pc from 'picocolors';
+import pc from 'picocolors';
 import { TestRunner, TerminalReporter } from '@acid-test/core';
 import { createBillingSuite } from '@acid-test/billing';
 import type { AuditOptions } from './audit.js';
@@ -7,7 +7,7 @@ export async function runBillingCommand(options: AuditOptions & { provider?: str
   const provider = options.provider || 'stripe';
   const suite = createBillingSuite(provider);
 
-  console.log(pc.bold(pc.cyan(`\n⚡ Launching Acidtest Billing Invariant Fuzzer (${provider.toUpperCase()})...`)));
+  console.log(pc.bold(pc.cyan(`\n⚡ Launching Acid-test Billing Invariant Fuzzer (${provider.toUpperCase()})...`)));
   const report = await TestRunner.runSuite(suite, {
     targetUrl: options.url || 'http://localhost:3000/api/webhooks/stripe',
     dbUrl: options.db,

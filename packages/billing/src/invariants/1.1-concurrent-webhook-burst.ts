@@ -1,4 +1,4 @@
-﻿import {
+import {
   type InvariantTest,
   type ExecutionContext,
   type InvariantResult,
@@ -17,7 +17,7 @@ export class ConcurrentWebhookBurstTest implements InvariantTest {
   async run(context: ExecutionContext): Promise<InvariantResult> {
     const startTime = Date.now();
     const targetUrl = context.targetUrl || 'http://localhost:3000/api/webhooks/stripe';
-    const secret = context.webhookSecret || 'whsec_acidtest_test_secret_key_12345';
+    const secret = context.webhookSecret || 'whsec_acid_test_test_secret_key_12345';
     const eventId = `evt_acid_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
     const customerId = `cus_acid_${Math.random().toString(36).substring(2, 7)}`;
 
@@ -54,7 +54,7 @@ export class ConcurrentWebhookBurstTest implements InvariantTest {
       headers: {
         'content-type': 'application/json',
         [sig.headerName]: sig.headerValue,
-        'user-agent': 'Acidtest-Adversarial-Fuzzer/1.0',
+        'user-agent': 'Acid-Test-Adversarial-Fuzzer/1.0',
       },
       body: payload,
       concurrency,

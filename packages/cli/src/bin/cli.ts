@@ -10,7 +10,7 @@ import { registerDomainCommands } from './domain-commands.js';
 const program = new Command();
 
 program
-  .name('acidtest')
+  .name('acid-test')
   .description('The definitive ACID reliability, security, and chaos-testing suite for distributed backends')
   .version('1.0.0')
   .option('-u, --url <url>', 'Target endpoint URL (default: http://localhost:3000)')
@@ -82,7 +82,7 @@ program
 program
   .command('init')
   .alias('setup')
-  .description('Scaffold acidtest.config.json configuration file in current directory')
+  .description('Scaffold acid-test.config.json configuration file in current directory')
   .action(async () => {
     await runInitCommand();
   });

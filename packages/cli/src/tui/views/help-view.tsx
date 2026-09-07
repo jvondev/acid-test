@@ -22,7 +22,7 @@ export const HelpView: React.FC<HelpProps> = ({ columns }) => {
         </Box>
         <Box gap={2} flexWrap="nowrap">
           <Text color="green" bold>[Enter / F] </Text>
-          <Text color="white">Apply Code Remediation / export patch to .acidtest/remediation.prompt.md</Text>
+          <Text color="white">Apply Code Remediation / export patch to .acid-test/remediation.prompt.md</Text>
         </Box>
         <Box gap={2} flexWrap="nowrap">
           <Text color="cyan" bold>[Space / A]</Text>

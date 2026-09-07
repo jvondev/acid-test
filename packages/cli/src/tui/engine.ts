@@ -1,4 +1,4 @@
-// ⚡ ACIDTEST PURE RATATUI FULLSCREEN ENGINE
+// ⚡ ACID-TEST PURE RATATUI FULLSCREEN ENGINE
 // Under 190 lines - Anti-Hydra Architecture: Gate-Opening State Machine & Full SGR Mouse Support
 
 import readline from 'readline';
@@ -282,7 +282,7 @@ export class RatatuiEngine {
         clearInterval(timer);
         this.isPromptExporting = false;
         exportPromptToFile(target);
-        this.showToast(`AI Prompt exported to .acidtest/remediation.prompt.md`);
+        this.showToast(`AI Prompt exported to .acid-test/remediation.prompt.md`);
       }
     }, 400);
   }
